@@ -1,0 +1,22 @@
+<OssGuiProject version="2.0" productVersion="10.1.1" product="ASN.1 Studio">
+ <Asn1Files>
+  <File>3GPP F1AP v15.3.0.asn</File>
+ </Asn1Files>
+ <CompilerSettings/>
+ <EncodingFiles>
+  <File format="binary" pduName="F1AP-PDU" encRule="Aligned PER">F1AP-PDU.per</File>
+ </EncodingFiles>
+ <Settings>
+  <Setting present="false" name="-noRelaxedMode"/>
+  <Setting name="-root"/>
+  <Setting name="STRICT_PER_ENCODING_OF_DEFAULT_VALUES"/>
+  <Setting name="AUTOMATIC_ENCDEC"/>
+  <Setting name="OSS_AUTO_ENCODE_WITHOUT_CHECKING_CONSTRAINT"/>
+  <Setting name="DEBUGPDU"/>
+  <Setting name="OSS_PRINT_TYPE_INFO"/>
+  <Setting name="OSS_PRINT_OFFSET"/>
+  <Setting name="OSS_PRINT_COMMENTS"/>
+  <Setting name="OSS_HEXBYTES"/>
+  <Setting name="-per"/>
+ </Settings>
+</OssGuiProject>

@@ -1,0 +1,69 @@
+headers_17_5 = [
+    "Feature / Platforms",
+    "AU544 LiteComp LTE-BH-IPsec 20Mhz FC2 B41",
+    "AU587 LiteComp LTE-BH-IPsec 20Mhz FC2 B41",
+    "AU544 LiteComp WIFI-BH-IPsec 20Mhz FC2 B41",
+    "AU587 LiteComp ETH-BH-IPsec 20Mhz FC2 B41",
+    "AS1300 LiteComp ETH-BH-IPsec 20Mhz FC2 B41",
+    "AS1300 MC/CA ETH-BH-IPsec 20+20Mhz FC2 B41",
+    "AH4K SC ETH-BH-IPsec 20Mhz FC2 B41",
+    "AH4K MC/CA ETH-BH-IPsec 20+20Mhz FC2 B41",
+    "AH4K SC ETH-BH 20Mhz FC2 B41",
+    "AH4K MC/CA ETH-BH 20+20Mhz FC2 B41",
+    "AH4K SC ETH-BH 20Mhz FDD B3",
+    "AH4K SC ETH-BH 10Mhz FDD B3",
+    "AH4K SC ETH-BH 5Mhz FDD B3",
+    "AH1KD SC ETH-BH 20Mhz FC2 B41",
+    "AH1KD MC/CA ETH-BH 20+20Mhz FC2 B41",
+    "AV100c SC ETH-BH-IPsec 20Mhz FC2 B41",
+    "AD386 SC LTE-BH-IPsec 15Mhz FDD B3",
+    "AH4400 SC ETH-BH 20Mhz FC2 B41",
+    "AH4400 MC/CA ETH-BH 20+20Mhz FC2 B41",
+    "AH4K SC ETH-BH 5Mhz FDD B26",
+    "AH4K SC ETH-BH 20Mhz FDD B26",
+    "AS1300 SC ETH-BH-IPsec 20Mhz FC1 B41",
+    "AS1300 MC/CA-NON-CONT ETH-BH-IPsec 20+10Mhz FC2 B41",
+    "AS1300 MC/CA-NON-CONT ETH-BH-IPsec 20+10Mhz FC1 B41",
+    "AH4200 SC ETH-BH 20Mhz FC2 B42",
+    "AH4200 SC ETH-BH 20Mhz FC1 B42",
+    "AH4200 MC ETH-BH 20+20Mhz FC1 B42",
+    "AH4200 MC/CA ETH-BH 20+20Mhz FC1 B42",
+    "AV1200 SC ETH-BH-IPsec 20Mhz FDD B7",
+    "AV1200 SC ETH-BH-IPsec 15Mhz FDD B7",
+    "AV1200 SC ETH-BH-IPsec 10Mhz FDD B7",
+    "AV1200 SC ETH-BH-IPsec 5Mhz FDD B7"
+]
+
+headers_17_0 = [
+    "Feature / Platforms",
+    "AS1035 MC-NON-CONT ETH-BH 20+10Mhz FC2 B40",
+    "AS1035 MC/CA-NON-CONT ETH-BH 20+10Mhz FC2 B40",
+    "AV1000 SC ETH-BH 20Mhz FC2 B40",
+    "AH1K SC ETH-BH 20Mhz FC2 B40"
+]
+
+headers_18_0 = [
+    "Feature / Platforms",
+    "AH4200 MC/CA-NON-CONT ETH-BH 20+20Mhz FC1 B48",
+    "AH4200 MC-NON-CONT ETH-BH 20+20Mhz FC1 B48",
+    "AH4200 SC ETH-BH 20Mhz FC1 B48",
+    "AV1500 MC/CA-NON-CONT ETH-BH-IPsec 20+10Mhz FC1 B48",
+    "AV1500 MC-NON-CONT ETH-BH-IPsec 20+10Mhz FC1 B48",
+    "AV1500 SC ETH-BH-IPsec 20Mhz FC1 B48",
+    "AS1030 MC-NON-CONT ETH-BH 20+20Mhz FC1 B48",
+    "AS1030 MC/CA-NON-CONT ETH-BH 20+20Mhz FC1 B48",
+    "AS1030 SC ETH-BH 20Mhz FC1 B48"
+]
+
+headers_rakuten_atp = [
+    "Feature / Platforms",
+    "AH4K SC Public-BH 20Mhz FDD B3",
+    "AH4K SC Public-BH 5Mhz FDD B3",
+    "AS1050 LiteComp Public-BH 20Mhz FDD B3",
+    "AS1050 LiteComp Public-BH 5Mhz FDD B3",
+    "AH4K SC Private-BH 20Mhz FDD B3",
+    "AH4K SC Private-BH 5Mhz FDD B3",
+    "AS1050 LiteComp Private-BH 20Mhz FDD B3",
+    "AS1050 LiteComp Private-BH 5Mhz FDD B3",
+    "AS1032 SC Private-BH 20Mhz FDD B3"
+]

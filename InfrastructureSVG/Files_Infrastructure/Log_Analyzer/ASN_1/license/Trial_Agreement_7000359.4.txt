@@ -1,0 +1,347 @@
+
+    TRIAL LICENSE AGREEMENT (the "Agreement") dated as of the date the
+user clicks acceptance to this Agreement (the "Effective Date") between
+OSS Nokalva, Inc., having an office at 300 Atrium Drive, Suite 402, 
+Somerset, New Jersey 08873 ("OSS") and the user that clicks acceptance 
+to this Agreement ("Customer" or "you").
+
+    THIS IS A BINDING CONTRACT.  OSS PROVIDES THE PROGRAMS SOLELY ON
+THE TERMS AND CONDITIONS SET FORTH IN THIS AGREEMENT AND ON THE 
+CONDITION THAT YOU ACCEPT AND COMPLY WITH THEM.  BY CLICKING THE 
+"ACCEPT" BUTTON YOU (A) ACCEPT THIS AGREEMENT AND AGREE THAT YOU ARE 
+LEGALLY BOUND BY ITS TERMS; AND (B) REPRESENT AND WARRANT THAT: (I) 
+YOU ARE 18 YEARS OF AGE OR OLDER; AND (II) IF CUSTOMER IS A CORPORATION,
+GOVERNMENTAL ORGANIZATION OR OTHER LEGAL ENTITY, YOU HAVE THE RIGHT, 
+POWER AND AUTHORITY TO ENTER INTO THIS AGREEMENT ON BEHALF OF CUSTOMER 
+AND BIND CUSTOMER TO ITS TERMS.  IF CUSTOMER DOES NOT AGREE TO THE TERMS
+OF THIS AGREEMENT, OSS WILL NOT AND DOES NOT LICENSE THE PROGRAMS TO 
+CUSTOMER AND CUSTOMER MUST NOT ACCESS, DOWNLOAD OR INSTALL ANY OF THE
+PROGRAMS.
+
+    In consideration of the obligations and promises contained herein 
+and intending to be legally bound, the parties agree as follows:
+
+1.  DEFINITIONS
+
+    1.1 "Compiler" means the OSS ASN.1 compiler component of the 
+Programs that translates ASN.1 specifications into output.
+
+    1.2 "Documentation" means all documents, manuals and specifications
+with respect to the Programs that are provided by OSS to Customer or 
+that Customer is permitted to access.
+
+    1.3 "Generated Source" means any and all of the output in all forms 
+of the Compiler.
+
+    1.4 "Programs" means the software programs downloaded by Customer 
+and all revisions, modifications and enhancements of and to any such
+software programs.
+
+    1.5 "Proprietary Information" means the Programs, the Generated 
+Source, the Documentation and all components, ideas, know-how, 
+algorithms, code and other proprietary information with respect to or
+included in any of the foregoing.
+
+2.  TRIAL LICENSE
+
+    2.1 License.  Subject to the terms and conditions of the Agreement, 
+OSS hereby grants to Customer a limited, non-transferrable, 
+non-exclusive and non-sublicensable license to use the Programs and 
+the Generated Source for a thirty day period from the Effective Date
+(or such longer period that may be agreed to by OSS in writing) solely
+for internal use and for evaluating whether to enter into a license 
+agreement to use any of the Programs for commercial use.  IN NO EVENT 
+SHALL CUSTOMER USE ANY OF THE PROGRAMS OR THE GENERATED SOURCE WITH 
+RESPECT TO THE DEVELOPMENT OF ANY SOFTWARE FOR PRODUCTION OR COMMERCIAL 
+USE. CUSTOMER'S LICENSE AND USE OF THE PROGRAMS IS LIMITED TO THE 
+EVALUATION PURPOSES SET FORTH ABOVE AND NOT FOR USE IN ANY PRODUCTION 
+ENVIRONMENT OR FOR COMMERCIAL USE.  EXCEPT FOR PROCESSING OR GENERATING 
+LIMITED DATA SOLELY FOR THE PURPOSES OF EVALUATING THE PROGRAMS, IN NO 
+EVENT SHALL CUSTOMER USE ANY OF THE PROGRAMS TO PROCESS OR GENERATE ANY
+DATA AND IN NO EVENT SHALL ANY SUCH LIMITED DATA PROCESSED OR GENERATED 
+BE USED FOR ANY PRODUCTION OR COMMERCIAL USE.
+
+    2.2 Additional Limitations.  Customer shall not decompile, 
+disassemble or otherwise reverse engineer the Programs.  In no event 
+shall Customer use the Programs, the Generated Source or the output 
+generated from use of any of the Programs with respect to any products 
+or services that are provided to third parties.  In no event shall 
+Customer use or deploy the Programs, the Generated Source or the output
+generated from use of any of the Programs for any commercial or 
+production use.  Customer acknowledges and agrees that this license is
+limited to use of the Programs and the Generated Source solely for 
+evaluation purposes of determining whether to license the Programs and
+that Customer has to enter into another license agreement with OSS if 
+it desires to use any of the Programs, the Generated Source or the 
+output generated from use of any of the Programs for any purposes 
+other than as expressly permitted by this Agreement.
+
+    2.3 Third Parties.  Customer has no right to provide any of the 
+Proprietary Information or the output generated from use of any of the
+Programs to any third party, except solely in connection with such 
+third party's evaluation of the Programs.  If Customer provides any 
+of the Proprietary Information or such output to such third party, 
+Customer shall be fully responsible and liable for such third party's
+compliance with the terms of this Agreement.  Customer acknowledges 
+and agrees that no "have made" rights are granted under this Agreement
+to Customer.
+
+    2.4 Restricted Rights.  Customer agrees that if Customer is the 
+Department of Defense or other unit or agency of the U.S. Government 
+subject to the DFARs (the "DOD"), the Programs and the Generated Source
+are classified as "Commercial Computer Programs" and the Documentation
+is classified as "Commercial Programs Documentation" and pursuant to 
+DFARs Section 227.7202 the U.S. Government is acquiring the Programs, 
+the Generated Source and the Documentation in accordance with the terms
+of this Agreement.  If Customer is any unit or agency of the U.S. 
+Government other than the DOD, the Programs or the Generated Source are
+classified as "Commercial Computer Programs" and the Documentation is
+classified as "Commercial Items" and pursuant to FAR Section 12.212, 
+the U.S. Government is acquiring a license to use the Programs, the 
+Generated Source and the Documentation in accordance with the terms 
+of this Agreement. 
+
+    2.5 Taxes.  Customer shall have sole liability and duty to pay all
+taxes arising with respect to this Agreement, now or hereafter in 
+effect, including any sales, use, export or import taxes, personal 
+property, excise, and value added taxes, and other governmental duties
+and charges.
+
+3.  PROPRIETARY INFORMATION AND OWNERSHIP
+
+    3.1 Ownership.  Customer acknowledges that all right, title, and 
+interest in and to the Proprietary Information and all intellectual 
+property rights with respect thereto are and at all times shall remain 
+with OSS.  Customer acknowledges that no right, title, or interest in 
+or to the Proprietary Information  and all intellectual property rights 
+with respect thereto are granted under this Agreement, and no such 
+assertion shall be made by Customer. Customer acknowledges that the 
+Proprietary Information is and shall remain the sole property of and 
+proprietary to OSS.  To the extent that Customer is deemed to have any
+ownership rights in the Proprietary Information, Customer hereby 
+assigns all of such rights to OSS.  Nothing in this Agreement shall 
+alter these rights and no title to or ownership of the Proprietary 
+Information or any intellectual property rights with respect thereto 
+are transferred to Customer.  No rights are granted to Customer other 
+than the limited license rights expressly set forth herein. Customer 
+is granted only a temporary, limited right of use of the Programs and 
+the Generated Source as set forth herein, which right of use is not 
+coupled with an interest and is revocable in accordance with the terms
+of this Agreement.  UPON TERMINATION OF THIS AGREEMENT, CUSTOMER SHALL 
+DESTROY AND ERASE ALL COPIES OF THE PROPRIETARY INFORMATION.  NO 
+COPIES OF THE PROGRAMS OR THE GENERATED SOURCE SHALL BE MAINTAINED BY 
+CUSTOMER UNLESS CUSTOMER ENTERS INTO A LICENSE AGREEMENT WITH OSS TO 
+LICENSE THE PROGRAMS FOR AN ADDITIONAL PERIOD AND PAYS THE APPLICABLE 
+LICENSE FEES.
+
+    3.2 Maintaining Confidentiality.  Customer acknowledges and agrees 
+that the Proprietary Information is the confidential information of 
+OSS.  Customer will maintain the confidentiality of the Proprietary 
+Information using at least the same procedures as it uses to maintain 
+the confidentiality of its own highly confidential information, but 
+in no event shall Customer use less than reasonable care.  Customer 
+shall not remove any copyright, confidentiality, or other proprietary
+rights notice provided by OSS in connection with any Proprietary 
+Information and any and all copies which Customer may make shall have
+such notices.  In addition, Customer agrees, that unless expressly 
+authorized in writing by OSS, Customer shall not make publicly 
+available or disclose to any third party any results or information 
+that it develops or determines arising out of or relating to Customer's
+use of the Programs, the Generated Source or the output generated from 
+any of the Programs, including, without limitation, any benchmarking 
+information with respect to any of the foregoing.
+
+4.  TERM
+
+    4.1 Termination by OSS.  In the event that Customer breaches any 
+of the terms and conditions of this Agreement, OSS has the right to 
+immediately terminate this Agreement and the license to use the 
+Programs by providing written notice to any email address provided by
+Customer to OSS.
+
+    4.2 Effect of Termination.  Without limiting any other rights and 
+remedies, upon the termination of this Agreement, all licenses granted 
+to Customer hereunder shall immediately terminate upon the termination
+or expiration of this Agreement for any reason, unless Customer has 
+entered into another license agreement with OSS with respect to the 
+Programs that allows Customer to continue to use the Programs (in 
+which case termination of such licenses covered by such license 
+agreement shall be governed by such license agreement).  Except if 
+Customer enters into another license agreement with OSS with respect 
+to the Programs, upon the termination or expiration of this Agreement, 
+Customer will immediately cease using the Programs and the Generated 
+Source, erase or otherwise destroy all copies of the Proprietary 
+Information, and delete all components of the Proprietary Information 
+from its systems and will provide certification to OSS by an authorized 
+officer of the Customer.  Sections 1, 3, 4.2, 4.3, 5 and 6 shall 
+survive the expiration and termination of this Agreement and the other 
+provisions of this Agreement shall terminate upon the termination or 
+expiration of this Agreement.
+
+    4.3 Time Lock Mechanism.  Customer acknowledges that the Programs 
+may include a mechanism that shall cause the Programs to cease functioning 
+upon the expiration or termination of this Agreement. 
+
+5.  DISCLAIMERS AND LIMITATION OF LIABILITY. 
+
+    5.1 Disclaimer.  EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, 
+ANY AND ALL OF THE PROGRAMS, THE PROPRIETARY INFORMATION, AND ALL 
+SERVICES ARE PROVIDED WITHOUT ANY WARRANTIES OR REPRESENTATIONS, 
+EXPRESS, IMPLIED OR STATUTORY.  OSS EXPRESSLY DISCLAIMS ANY AND ALL 
+IMPLIED WARRANTIES AND REPRESENTATIONS WITH RESPECT TO THIS AGREEMENT, 
+THE PROGRAMS, THE PROPRIETARY INFORMATION, AND ANY SERVICES PROVIDED 
+BY OSS, INCLUDING, WITHOUT LIMITATION, ANY AND ALL IMPLIED WARRANTIES 
+OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, OR ARISING
+FROM A COURSE OF DEALING OR USAGE OF TRADE.  
+
+    5.2 Limitation of Liability.  EVEN IF ADVISED OF THE POSSIBILITY 
+THEREOF AND NOTWITHSTANDING ANY FAILURE OF ESSENTIAL PURPOSE OF ANY 
+REMEDY, IN NO EVENT WILL OSS (ITS AFFILIATES AND ITS AND THEIR 
+OFFICERS, DIRECTORS, EMPLOYESS, AND REPRESENTATIVES) BE LIABLE HEREUNDER
+OR OTHERWISE, HOWEVER CAUSED AND UNDER ANY THEORY OF LIABILITY, ARISING
+OUT OF OR IN CONNECTION WITH THIS AGREEMENT (INCLUDING, WITHOUT 
+LIMITATION, THE TERMINATION OF THIS AGREEMENT),  THE PROGRAMS, THE 
+PROPRIETARY INFORMATION, OR THE SERVICES PROVIDED BY OSS FOR ANY CLAIMS 
+OF PERSONAL INJURY OR ANY INCIDENTAL, CONSEQUENTIAL, EXEMPLARY, PUNITIVE
+OR SPECIAL DAMAGES OR DAMAGES BASED ON RELIANCE, COVER, COSTS OF 
+SUBSTITUTE GOODS, BUSINESS INTERRUPTION, TORT, LOSS OF PROFITS OR 
+BENEFITS OR LOSS OF DATA, BUSINESS REPUTATION OR GOODWILL.  OSS AND ITS
+AFFILIATES HAVE NO LIABILITY WITH RESPECT TO ANY CLAIM OR DEMAND AGAINST
+CUSTOMER BY ANY THIRD PARTY.  WITH RESPECT TO ALL CLAIMS ARISING OUT OF 
+OR RELATING TO THIS AGREEMENT, THE PROGRAMS, THE PROPRIETARY INFORMATION,
+OR THE SERVICES PROVIDED BY OSS, OSS' AGGREGATE LIABILITY SHALL NOT BE 
+IN EXCESS OF ONE DOLLAR.
+
+6.  GENERAL
+
+    6.1 Entire Agreement; Waiver. This Agreement constitutes the entire 
+agreement between the parties with respect to its subject matter and 
+supersedes all prior oral and written quotations, communications, 
+agreements and understandings of the parties with respect to its subject
+matter.  This Agreement may only be amended by a document that expressly 
+states that it is an amendment to this Agreement and that is executed by
+both of the parties, which amendment expressly references the sections
+in this Agreement that it is amending. The failure of either party at 
+any time to enforce any right or remedy available to it under this 
+Agreement or otherwise with respect to any breach or failure by the 
+other party will not be construed to be a waiver of such right or remedy
+with respect to such breach or failure of any other breach or failure by
+the other party.  Any waiver of the performance of any of the terms or 
+conditions of this Agreement shall be effective only if in writing and 
+signed by the party against which such waiver is to be enforced. 
+
+    6.2 Certain Remedies. Customer will pay reasonable expenses, 
+including legal fees, incurred by OSS to enforce its rights under this 
+Agreement.   In the event of (i) any breach or threatened breach of any
+provision of this Agreement by Customer with respect to or relating to 
+any of the Proprietary Information or (ii) any infringement or 
+threatened infringement by Customer of any of OSS' intellectual property
+rights, OSS may incur irreparable injury inadequately compensated by 
+money damages and OSS may seek an injunction (including, without 
+limitation, temporary and preliminary relief) and other appropriate 
+equitable remedies with respect thereto without posting a bond.  This 
+remedy is in addition to such other remedies as OSS may have under this
+Agreement or by law.
+
+    6.3 Law and Venue. This Agreement and all transactions under it and 
+all claims arising out of or relating to this Agreement or any of the 
+Proprietary Information, including, without limitation, tort claims, 
+will be governed by the laws of the State of New Jersey excluding its 
+choice of laws, rules, except that with respect to any claim with 
+respect to copyright and patent rights United States federal laws shall
+apply.  The parties agree that the United Nations Convention for the 
+International Sale of Goods shall not apply or govern this Agreement.  
+With respect to all disputes and claims arising out of relating to this
+Agreement, or any of the Proprietary Information, the parties agree to 
+submit to the exclusive jurisdiction of the New Jersey federal and state
+courts and waive any claim of or any rights with respect to immunity or 
+inconvenient form.
+
+    6.4 Export. Customer hereby certifies that: (i) it is not a Restricted
+Party (as hereinafter defined), (ii) it will only export or re-export the
+Proprietary Information and the Products in compliance with the laws of the
+United States, including without limitation all Export Administration
+Regulations (“EAR”) of the United States Department of Commerce; and (ii) bear
+sole responsibility for any violation of such laws and regulations. In
+addition, Customer certifies it will not provide or license any of the
+Proprietary Information or the Products to entities or persons or for uses
+prohibited by United States export laws or regulations. Customer also
+certifies that no officer, director or employee of Customer who is a
+Restricted Party has or will (a) participate in the negotiation, drafting or
+approval of this Agreement, (b) sign this Agreement or any other document that
+has been or will be signed by Company, or (c) receive any personal gain or
+benefit as a result of this Agreement. “Restricted Party” means (i) any entity
+or  individual in the List of Specially Designated Nationals or Consolidated
+Sanctions List administered by the US Office of Foreign Assets Control, (ii)
+any entity or individual  located in or part of any government of any country
+covered by a United States general trade embargo, (iii) any entity owned 50%
+or more either individually or in the aggregate by any of the foregoing
+individuals or entities and (iv) any entity or individual in the Denied
+Persons List, Entity List or Unverified List administered by the Bureau of
+Industry and Security, or in a successor to any of these lists or any similar
+additional lists. If Customer becomes a Restricted Person, Customer shall (i)
+immediately inform OSS of such status and (ii) this Agreement and the license
+granted hereunder shall immediately terminate and OSS shall not be obligated
+to return any paid license fees.  
+
+    6.5 Notices. Notices will be deemed effective hereunder if provided 
+in writing, delivered in person, or by certified or registered mail, or
+by FedEx or similar private courier service to the address of OSS set 
+forth above or to any address provided by Customer to OSS as Customer's
+address, or if provided to Customer by sending written notice to any 
+email provided by Customer to OSS.
+
+    6.6 Partial Invalidity. If any of the provisions of this Agreement 
+will be invalid or unenforceable, the invalidity or unenforceability
+will not invalidate or render unenforceable this entire Agreement, 
+which will instead be construed as if not containing the particular 
+invalid or unenforceable provision or provisions, and the rights and
+obligations of the parties will be construed and enforced accordingly.
+
+    6.7 Assignment.  Customer has no right to assign or transfer this 
+Agreement or the license granted under this Agreement, including, 
+without limitation, in connection with any change in control of 
+Customer such as an acquisition of a majority of Customer's equity 
+ownership.  Any assignment or transfer in violation of this Section 
+shall be null and void.
+
+    6.8 Authorization with Respect to Use of Personal Information.
+Customer, acknowledges, agrees and consents that if Customer is an 
+individual, (i) OSS may maintain correspondence with Customer and 
+personal information with respect to Customer as needed in connection
+with OSS' business needs, including, Customer's name, contact 
+information email and IP addresses, (ii) Customer shall only provide 
+such personal data as is needed in connection with Customer's use of 
+the Programs and its obligations under this Agreement and 
+(iii) Customer's personal information that has been provided by 
+Customer will be exported and maintained in the United States and 
+other countries in connection with OSS' business needs.  If Customer 
+is an entity ("Entity Customer"), then Entity Customer acknowledges 
+and agrees that Entity Customer requires its personnel that 
+communicate with OSS to only communicate with OSS through their work 
+email and only use Entity Customer owned and issued devices with 
+respect to such communications.  In addition, Entity Customer does 
+not and does not permit any of its employees or contractors and 
+contractors' personnel to provide to OSS any personal data other than 
+such data as is needed in connection with Entity Customer's use of 
+the Programs and its obligations under this Agreement, and in such 
+cases Entity Customer has advised such individuals providing such 
+data that such data may be disclosed to OSS and that such data may 
+be exported to and maintained in the United States and other 
+countries by OSS in connection with OSS' business needs. Entity 
+Customer agrees that for all purposes under applicable law, Entity 
+Customer is the Data Controller (as defined under any applicable laws) 
+with respect to any personal data provided by Entity Customer, its 
+employees, its contractors and its contractors' employees.  Entity 
+Customer acknowledges, agrees and consents that OSS may maintain 
+correspondence with Entity Customer and personal information with 
+respect to Entity Customer's employees and contractors and 
+contractors' employees as is needed in connection with OSS' business 
+needs, including, such individual's names, contact information, email 
+and IP addresses, and that Customer is authorized by such individuals 
+to permit such use.
+
+
+
+Copyright (C) 2019 OSS NOKALVA (R), Inc. All Rights reserved 
+ClickTr_09.30.19_#7000359.4

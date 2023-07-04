@@ -1,0 +1,116 @@
+xml_data_1 = '''<F1AP-PDU>
+<initiatingMessage>
+<procedureCode>11</procedureCode>
+<criticality>
+  <ignore/>
+</criticality>
+<value>
+  <InitialULRRCMessageTransfer>
+    <protocolIEs>
+      <SEQUENCE>
+        <id>41</id>
+        <criticality>
+          <reject/>
+        </criticality>
+        <value>
+          <GNB-DU-UE-F1AP-ID>6</GNB-DU-UE-F1AP-ID>
+        </value>
+      </SEQUENCE>
+      <SEQUENCE>
+        <id>111</id>
+        <criticality>
+          <reject/>
+        </criticality>
+        <value>
+          <NRCGI>
+            <pLMN-Identity>02F010</pLMN-Identity>
+            <nRCellIdentity>000000000000000000001001000110010001</nRCellIdentity>
+          </NRCGI>
+        </value>
+      </SEQUENCE>
+      <SEQUENCE>
+        <id>95</id>
+        <criticality>
+          <reject/>
+        </criticality>
+        <value>
+          <C-RNTI>2255</C-RNTI>
+        </value>
+      </SEQUENCE>
+      <SEQUENCE>
+        <id>50</id>
+        <criticality>
+          <reject/>
+        </criticality>
+        <value>
+          <RRCContainer>003CDD6FA324</RRCContainer>
+        </value>
+      </SEQUENCE>
+      <SEQUENCE>
+        <id>128</id>
+        <criticality>
+          <reject/>
+        </criticality>
+        <value>
+          <DUtoCURRCContainer>
+            5C00B001100AEC841061EA08FA13204483D0A0004325981B50001FFFF800000010EE108400122226E18840012222CA008090408018040002C00142140050002662A490838002081840A183D388122858C1A3878A1100008034020106D010141B4060704D020241340A0A04D030200340E0900D04031234121148D05059234161<!--...-->
+          </DUtoCURRCContainer>
+        </value>
+      </SEQUENCE>
+    </protocolIEs>
+  </InitialULRRCMessageTransfer>
+</value>
+</initiatingMessage>
+</F1AP-PDU>'''
+
+xml_data_2 = '''
+<UL-CCCH-Message>
+<message>
+<c1>
+  <rrcSetupRequest>
+    <rrcSetupRequest>
+      <ue-Identity>
+        <ng-5G-S-TMSI-Part1>000000111100110111010110111110100011001</ng-5G-S-TMSI-Part1>
+      </ue-Identity>
+      <establishmentCause>
+        <mt-Access/>
+      </establishmentCause>
+      <spare>0</spare>
+    </rrcSetupRequest>
+  </rrcSetupRequest>
+</c1>
+</message>
+</UL-CCCH-Message>'''
+
+xml_data_3 = '''<NGAP-PDU>
+  <successfulOutcome>
+    <procedureCode>14</procedureCode>
+    <criticality>
+      <reject/>
+    </criticality>
+    <value>
+      <InitialContextSetupResponse>
+        <protocolIEs>
+          <SEQUENCE>
+            <id>10</id>
+            <criticality>
+              <ignore/>
+            </criticality>
+            <value>
+              <AMF-UE-NGAP-ID>3326</AMF-UE-NGAP-ID>
+            </value>
+          </SEQUENCE>
+          <SEQUENCE>
+            <id>85</id>
+            <criticality>
+              <ignore/>
+            </criticality>
+            <value>
+              <RAN-UE-NGAP-ID>13</RAN-UE-NGAP-ID>
+            </value>
+          </SEQUENCE>
+        </protocolIEs>
+      </InitialContextSetupResponse>
+    </value>
+  </successfulOutcome>
+</NGAP-PDU>'''

@@ -1,0 +1,110 @@
+xml_data_1 = '''<NGAP-PDU>
+  <initiatingMessage>
+    <procedureCode>42</procedureCode>
+    <criticality>
+      <ignore/>
+    </criticality>
+    <value>
+      <UEContextReleaseRequest>
+        <protocolIEs>
+          <SEQUENCE>
+            <id>10</id>
+            <criticality>
+              <reject/>
+            </criticality>
+            <value>
+              <AMF-UE-NGAP-ID>20602</AMF-UE-NGAP-ID>
+            </value>
+          </SEQUENCE>
+          <SEQUENCE>
+            <id>85</id>
+            <criticality>
+              <reject/>
+            </criticality>
+            <value>
+              <RAN-UE-NGAP-ID>233</RAN-UE-NGAP-ID>
+            </value>
+          </SEQUENCE>
+          <SEQUENCE>
+            <id>133</id>
+            <criticality>
+              <reject/>
+            </criticality>
+            <value>
+              <PDUSessionResourceListCxtRelReq>
+                <PDUSessionResourceItemCxtRelReq>
+                  <pDUSessionID>1</pDUSessionID>
+                </PDUSessionResourceItemCxtRelReq>
+              </PDUSessionResourceListCxtRelReq>
+            </value>
+          </SEQUENCE>
+          <SEQUENCE>
+            <id>15</id>
+            <criticality>
+              <ignore/>
+            </criticality>
+            <value>
+              <Cause>
+                <radioNetwork>
+                  <user-inactivity/>
+                </radioNetwork>
+              </Cause>
+            </value>
+          </SEQUENCE>
+        </protocolIEs>
+      </UEContextReleaseRequest>
+    </value>
+  </initiatingMessage>
+</NGAP-PDU>'''
+
+xml_data_2 = '''
+<UL-CCCH-Message>
+<message>
+<c1>
+  <rrcSetupRequest>
+    <rrcSetupRequest>
+      <ue-Identity>
+        <ng-5G-S-TMSI-Part1>000000111100110111010110111110100011001</ng-5G-S-TMSI-Part1>
+      </ue-Identity>
+      <establishmentCause>
+        <mt-Access/>
+      </establishmentCause>
+      <spare>0</spare>
+    </rrcSetupRequest>
+  </rrcSetupRequest>
+</c1>
+</message>
+</UL-CCCH-Message>'''
+
+xml_data_3 = '''<NGAP-PDU>
+  <successfulOutcome>
+    <procedureCode>14</procedureCode>
+    <criticality>
+      <reject/>
+    </criticality>
+    <value>
+      <InitialContextSetupResponse>
+        <protocolIEs>
+          <SEQUENCE>
+            <id>10</id>
+            <criticality>
+              <ignore/>
+            </criticality>
+            <value>
+              <AMF-UE-NGAP-ID>3326</AMF-UE-NGAP-ID>
+            </value>
+          </SEQUENCE>
+          <SEQUENCE>
+            <id>85</id>
+            <criticality>
+              <ignore/>
+            </criticality>
+            <value>
+              <RAN-UE-NGAP-ID>13</RAN-UE-NGAP-ID>
+            </value>
+          </SEQUENCE>
+        </protocolIEs>
+      </InitialContextSetupResponse>
+    </value>
+  </successfulOutcome>
+</NGAP-PDU>'''

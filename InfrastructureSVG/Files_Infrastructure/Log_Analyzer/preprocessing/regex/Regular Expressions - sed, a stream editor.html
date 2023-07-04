@@ -1,0 +1,248 @@
+
+<!-- saved from url=(0074)https://www.gnu.org/software/sed/manual/html_node/Regular-Expressions.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Regular Expressions - sed, a stream editor</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="sed, a stream editor">
+<meta name="generator" content="makeinfo 4.11">
+<link title="Top" rel="start" href="https://www.gnu.org/software/sed/manual/html_node/index.html#Top">
+<link rel="up" href="https://www.gnu.org/software/sed/manual/html_node/sed-Programs.html#sed-Programs" title="sed Programs">
+<link rel="prev" href="https://www.gnu.org/software/sed/manual/html_node/Addresses.html#Addresses" title="Addresses">
+<link rel="next" href="https://www.gnu.org/software/sed/manual/html_node/Common-Commands.html#Common-Commands" title="Common Commands">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This file documents version 4.2.1 of
+GNU `sed', a stream editor.
+
+Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Free
+Software Foundation, Inc.
+
+This document is released under the terms of the GNU Free
+Documentation License as published by the Free Software Foundation;
+either version 1.1, or (at your option) any later version.
+
+You should have received a copy of the GNU Free Documentation
+License along with GNU `sed'; see the file `COPYING.DOC'.
+If not, write to the Free Software Foundation, 59 Temple Place - Suite
+330, Boston, MA 02110-1301, USA.
+
+There are no Cover Texts and no Invariant Sections; this text, along
+with its equivalent in the printed manual, constitutes the Title Page.-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Regular-Expressions"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="https://www.gnu.org/software/sed/manual/html_node/Common-Commands.html#Common-Commands">Common Commands</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="https://www.gnu.org/software/sed/manual/html_node/Addresses.html#Addresses">Addresses</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="https://www.gnu.org/software/sed/manual/html_node/sed-Programs.html#sed-Programs">sed Programs</a>
+</p><hr>
+</div>
+
+<h3 class="section">3.3 Overview of Regular Expression Syntax</h3>
+
+<p>To know how to use <samp><span class="command">sed</span></samp>, people should understand regular
+expressions (<dfn>regexp</dfn> for short).  A regular expression
+is a pattern that is matched against a
+subject string from left to right.  Most characters are
+<dfn>ordinary</dfn>: they stand for
+themselves in a pattern, and match the corresponding characters
+in the subject.  As a trivial example, the pattern
+
+</p><pre class="example">     The quick brown fox
+</pre>
+   <p class="noindent">matches a portion of a subject string that is identical to
+itself.  The power of regular expressions comes from the
+ability to include alternatives and repetitions in the pattern. 
+These are encoded in the pattern by the use of <dfn>special characters</dfn>,
+which do not stand for themselves but instead
+are interpreted in some special way.  Here is a brief description
+of regular expression syntax as used in <samp><span class="command">sed</span></samp>.
+
+     </p><dl>
+<dt><var>char</var></dt><dd>A single ordinary character matches itself.
+
+     <br></dd><dt><code>*</code></dt><dd><a name="index-g_t_0040acronym_007bGNU_007d-extensions_002c-to-basic-regular-expressions-79"></a>Matches a sequence of zero or more instances of matches for the
+preceding regular expression, which must be an ordinary character, a
+special character preceded by <code>\</code>, a <code>.</code>, a grouped regexp
+(see below), or a bracket expression.  As a <acronym>GNU</acronym> extension, a
+postfixed regular expression can also be followed by <code>*</code>; for
+example, <code>a**</code> is equivalent to <code>a*</code>.  <acronym>POSIX</acronym>
+1003.1-2001 says that <code>*</code> stands for itself when it appears at
+the start of a regular expression or subexpression, but many
+non<acronym>GNU</acronym> implementations do not support this and portable
+scripts should instead use <code>\*</code> in these contexts.
+
+     <br></dd><dt><code>\+</code></dt><dd><a name="index-g_t_0040acronym_007bGNU_007d-extensions_002c-to-basic-regular-expressions-80"></a>As <code>*</code>, but matches one or more.  It is a <acronym>GNU</acronym> extension.
+
+     <br></dd><dt><code>\?</code></dt><dd><a name="index-g_t_0040acronym_007bGNU_007d-extensions_002c-to-basic-regular-expressions-81"></a>As <code>*</code>, but only matches zero or one.  It is a <acronym>GNU</acronym> extension.
+
+     <br></dd><dt><code>\{</code><var>i</var><code>\}</code></dt><dd>As <code>*</code>, but matches exactly <var>i</var> sequences (<var>i</var> is a
+decimal integer; for portability, keep it between 0 and 255
+inclusive).
+
+     <br></dd><dt><code>\{</code><var>i</var><code>,</code><var>j</var><code>\}</code></dt><dd>Matches between <var>i</var> and <var>j</var>, inclusive, sequences.
+
+     <br></dd><dt><code>\{</code><var>i</var><code>,\}</code></dt><dd>Matches more than or equal to <var>i</var> sequences.
+
+     <br></dd><dt><code>\(</code><var>regexp</var><code>\)</code></dt><dd>Groups the inner <var>regexp</var> as a whole, this is used to:
+
+          <ul>
+<li><a name="index-g_t_0040acronym_007bGNU_007d-extensions_002c-to-basic-regular-expressions-82"></a>Apply postfix operators, like <code>\(abcd\)*</code>:
+this will search for zero or more whole sequences
+of ‘<samp><span class="samp">abcd</span></samp>’, while <code>abcd*</code> would search
+for ‘<samp><span class="samp">abc</span></samp>’ followed by zero or more occurrences
+of ‘<samp><span class="samp">d</span></samp>’.  Note that support for <code>\(abcd\)*</code> is
+required by <acronym>POSIX</acronym> 1003.1-2001, but many non-<acronym>GNU</acronym>
+implementations do not support it and hence it is not universally
+portable.
+
+          </li><li>Use back references (see below). 
+</li></ul>
+
+     <br></dd><dt><code>.</code></dt><dd>Matches any character, including newline.
+
+     <br></dd><dt><code>^</code></dt><dd>Matches the null string at beginning of the pattern space, i.e. what
+appears after the circumflex must appear at the beginning of the
+pattern space.
+
+     <p>In most scripts, pattern space is initialized to the content of each
+line (see <a href="https://www.gnu.org/software/sed/manual/html_node/Execution-Cycle.html#Execution-Cycle">How <code>sed</code> works</a>).  So, it is a
+useful simplification to think of <code>^#include</code> as matching only
+lines where ‘<samp><span class="samp">#include</span></samp>’ is the first thing on line—if there are
+spaces before, for example, the match fails.  This simplification is
+valid as long as the original content of pattern space is not modified,
+for example with an <code>s</code> command.
+
+     </p><p><code>^</code> acts as a special character only at the beginning of the
+regular expression or subexpression (that is, after <code>\(</code> or
+<code>\|</code>).  Portable scripts should avoid <code>^</code> at the beginning of
+a subexpression, though, as <acronym>POSIX</acronym> allows implementations that
+treat <code>^</code> as an ordinary character in that context.
+
+     <br></p></dd><dt><code>$</code></dt><dd>It is the same as <code>^</code>, but refers to end of pattern space. 
+<code>$</code> also acts as a special character only at the end
+of the regular expression or subexpression (that is, before <code>\)</code>
+or <code>\|</code>), and its use at the end of a subexpression is not
+portable.
+
+     <br></dd><dt><code>[</code><var>list</var><code>]</code></dt><dt><code>[^</code><var>list</var><code>]</code></dt><dd>Matches any single character in <var>list</var>: for example,
+<code>[aeiou]</code> matches all vowels.  A list may include
+sequences like <var>char1</var><code>-</code><var>char2</var>, which
+matches any character between (inclusive) <var>char1</var>
+and <var>char2</var>.
+
+     <p>A leading <code>^</code> reverses the meaning of <var>list</var>, so that
+it matches any single character <em>not</em> in <var>list</var>.  To include
+<code>]</code> in the list, make it the first character (after
+the <code>^</code> if needed), to include <code>-</code> in the list,
+make it the first or last; to include <code>^</code> put
+it after the first character.
+
+     </p><p><a name="index-g_t_0040code_007bPOSIXLY_005fCORRECT_007d-behavior_002c-bracket-expressions-83"></a>The characters <code>$</code>, <code>*</code>, <code>.</code>, <code>[</code>, and <code>\</code>
+are normally not special within <var>list</var>.  For example, <code>[\*]</code>
+matches either ‘<samp><span class="samp">\</span></samp>’ or ‘<samp><span class="samp">*</span></samp>’, because the <code>\</code> is not
+special here.  However, strings like <code>[.ch.]</code>, <code>[=a=]</code>, and
+<code>[:space:]</code> are special within <var>list</var> and represent collating
+symbols, equivalence classes, and character classes, respectively, and
+<code>[</code> is therefore special within <var>list</var> when it is followed by
+<code>.</code>, <code>=</code>, or <code>:</code>.  Also, when not in
+<samp><span class="env">POSIXLY_CORRECT</span></samp> mode, special escapes like <code>\n</code> and
+<code>\t</code> are recognized within <var>list</var>.  See <a href="https://www.gnu.org/software/sed/manual/html_node/Escapes.html#Escapes">Escapes</a>.
+
+     <br></p></dd><dt><var>regexp1</var><code>\|</code><var>regexp2</var></dt><dd><a name="index-g_t_0040acronym_007bGNU_007d-extensions_002c-to-basic-regular-expressions-84"></a>Matches either <var>regexp1</var> or <var>regexp2</var>.  Use
+parentheses to use complex alternative regular expressions. 
+The matching process tries each alternative in turn, from
+left to right, and the first one that succeeds is used. 
+It is a <acronym>GNU</acronym> extension.
+
+     <br></dd><dt><var>regexp1</var><var>regexp2</var></dt><dd>Matches the concatenation of <var>regexp1</var> and <var>regexp2</var>. 
+Concatenation binds more tightly than <code>\|</code>, <code>^</code>, and
+<code>$</code>, but less tightly than the other regular expression
+operators.
+
+     <br></dd><dt><code>\</code><var>digit</var></dt><dd>Matches the <var>digit</var>-th <code>\(...\)</code> parenthesized
+subexpression in the regular expression.  This is called a <dfn>back
+reference</dfn>.  Subexpressions are implicity numbered by counting
+occurrences of <code>\(</code> left-to-right.
+
+     <br></dd><dt><code>\n</code></dt><dd>Matches the newline character.
+
+     <br></dd><dt><code>\</code><var>char</var></dt><dd>Matches <var>char</var>, where <var>char</var> is one of <code>$</code>,
+<code>*</code>, <code>.</code>, <code>[</code>, <code>\</code>, or <code>^</code>. 
+Note that the only C-like
+backslash sequences that you can portably assume to be
+interpreted are <code>\n</code> and <code>\\</code>; in particular
+<code>\t</code> is not portable, and matches a ‘<samp><span class="samp">t</span></samp>’ under most
+implementations of <samp><span class="command">sed</span></samp>, rather than a tab character.
+
+   </dd></dl>
+
+   <p><a name="index-Greedy-regular-expression-matching-85"></a>Note that the regular expression matcher is greedy, i.e., matches
+are attempted from left to right and, if two or more matches are
+possible starting at the same character, it selects the longest.
+
+</p><p class="noindent">Examples:
+     </p><dl>
+<dt>‘<samp><span class="samp">abcdef</span></samp>’</dt><dd>Matches ‘<samp><span class="samp">abcdef</span></samp>’.
+
+     <br></dd><dt>‘<samp><span class="samp">a*b</span></samp>’</dt><dd>Matches zero or more ‘<samp><span class="samp">a</span></samp>’s followed by a single
+‘<samp><span class="samp">b</span></samp>’.  For example, ‘<samp><span class="samp">b</span></samp>’ or ‘<samp><span class="samp">aaaaab</span></samp>’.
+
+     <br></dd><dt>‘<samp><span class="samp">a\?b</span></samp>’</dt><dd>Matches ‘<samp><span class="samp">b</span></samp>’ or ‘<samp><span class="samp">ab</span></samp>’.
+
+     <br></dd><dt>‘<samp><span class="samp">a\+b\+</span></samp>’</dt><dd>Matches one or more ‘<samp><span class="samp">a</span></samp>’s followed by one or more
+‘<samp><span class="samp">b</span></samp>’s: ‘<samp><span class="samp">ab</span></samp>’ is the shortest possible match, but
+other examples are ‘<samp><span class="samp">aaaab</span></samp>’ or ‘<samp><span class="samp">abbbbb</span></samp>’ or
+‘<samp><span class="samp">aaaaaabbbbbbb</span></samp>’.
+
+     <br></dd><dt>‘<samp><span class="samp">.*</span></samp>’</dt><dt>‘<samp><span class="samp">.\+</span></samp>’</dt><dd>These two both match all the characters in a string;
+however, the first matches every string (including the empty
+string), while the second matches only strings containing
+at least one character.
+
+     <br></dd><dt>‘<samp><span class="samp">^main.*(.*)</span></samp>’</dt><dd>This matches a string starting with ‘<samp><span class="samp">main</span></samp>’,
+followed by an opening and closing
+parenthesis.  The ‘<samp><span class="samp">n</span></samp>’, ‘<samp><span class="samp">(</span></samp>’ and ‘<samp><span class="samp">)</span></samp>’ need not
+be adjacent.
+
+     <br></dd><dt>‘<samp><span class="samp">^#</span></samp>’</dt><dd>This matches a string beginning with ‘<samp><span class="samp">#</span></samp>’.
+
+     <br></dd><dt>‘<samp><span class="samp">\\$</span></samp>’</dt><dd>This matches a string ending with a single backslash.  The
+regexp contains two backslashes for escaping.
+
+     <br></dd><dt>‘<samp><span class="samp">\$</span></samp>’</dt><dd>Instead, this matches a string consisting of a single dollar sign,
+because it is escaped.
+
+     <br></dd><dt>‘<samp><span class="samp">[a-zA-Z0-9]</span></samp>’</dt><dd>In the C locale, this matches any <acronym>ASCII</acronym> letters or digits.
+
+     <br></dd><dt>‘<samp><span class="samp">[^ </span><kbd>tab</kbd><span class="samp">]\+</span></samp>’</dt><dd>(Here <kbd>tab</kbd> stands for a single tab character.) 
+This matches a string of one or more
+characters, none of which is a space or a tab. 
+Usually this means a word.
+
+     <br></dd><dt>‘<samp><span class="samp">^\(.*\)\n\1$</span></samp>’</dt><dd>This matches a string consisting of two equal substrings separated by
+a newline.
+
+     <br></dd><dt>‘<samp><span class="samp">.\{9\}A$</span></samp>’</dt><dd>This matches nine characters followed by an ‘<samp><span class="samp">A</span></samp>’.
+
+     <br></dd><dt>‘<samp><span class="samp">^.\{15\}A</span></samp>’</dt><dd>This matches the start of a string that contains 16 characters,
+the last of which is an ‘<samp><span class="samp">A</span></samp>’.
+
+   </dd></dl>
+
+   
+
+</body></html>
