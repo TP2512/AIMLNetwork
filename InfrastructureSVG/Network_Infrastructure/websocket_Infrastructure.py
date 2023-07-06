@@ -28,6 +28,14 @@ class WebSocketActions:
         self.get_output()
 
     def send_command(self, command: str, time_before_output: int = 1) -> None:
+         """
+        This function responsible to send one command (return output)
+
+        The function get 2 parameter:
+            - "commands" - the command (one command!) that need to send (string/list type)
+            - "time_before_output" - the time before taking output (integer type) [Optional]
+        """
+
         self.web_socket.send('{"message": "ue_get"}')
         self.web_socket.send(command)
         time.sleep(time_before_output)

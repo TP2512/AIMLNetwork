@@ -12,6 +12,7 @@ class Iperf2Actions:
         self.user_side_run_commands_list = []
 
     def build_interface_command(self, **kwargs):
+        """This method used to create new interface. """
         interface_command = None
 
         interface_name = kwargs.get('interface_name')
@@ -52,6 +53,7 @@ class Iperf2Actions:
 
     def build_tcp_run_commands(self, traffic_direction, window_size, tcp_udp_port, run_time,
                                iperf_sessions_number, dl_ip_address=None, user_wan_ip_address=None, **kwargs):
+        """This method used to run commands on tcp port. """
         network_side_command = []
         user_side_command = []
         try:
@@ -74,6 +76,7 @@ class Iperf2Actions:
 
     def build_udp_run_commands(self, traffic_direction, frame_size, tcp_udp_port, run_time, rate, dl_ip_address=None,
                                user_wan_ip_address=None, **kwargs):
+        """This method used to run commands on udp port. """
         network_side_command = []
         user_side_command = []
         try:
