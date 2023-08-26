@@ -1,0 +1,13 @@
+pandas
+networkx
+xlrd
+xlwt
+pyvis
+openpyxl
+matplotlib
+lxml
+workbook
+XlsxWriter
+pyxlsb
+plotly
+dash
