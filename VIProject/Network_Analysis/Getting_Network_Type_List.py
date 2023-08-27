@@ -4,7 +4,7 @@ from pyvis.network import Network
 import os
 import matplotlib.pyplot as plt
 
-linked_list_df = pd.read_excel(r"Data\ll_test.xlsx",usecols=['source', 'target'])
+linked_list_df = pd.read_excel(r"Data\ll_test_single_net.xlsx",usecols=['source', 'target'])
 no_of_rows=linked_list_df.shape[0] #get number of rows
 linked_list_df.dropna(inplace=True)
 linked_list_df['links'] = linked_list_df['source'] + '-' + linked_list_df['target']
