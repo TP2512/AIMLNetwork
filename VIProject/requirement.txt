@@ -11,3 +11,4 @@ XlsxWriter
 pyxlsb
 plotly
 dash
+scikit-learn

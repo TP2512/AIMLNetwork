@@ -27,7 +27,6 @@ print("group finding complete")
 #plot graph
 nt = Network('600px', '1200px')
 nt.from_nx(G)
-nt.from_nx(G)
 nt.show('nx.html', notebook=False)
 
 rings_in_network=list(nx.simple_cycles(G))
