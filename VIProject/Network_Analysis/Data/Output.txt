@@ -1,0 +1,95 @@
+main graphs {'a5', 'a31', 'a42', 'a52_GNE', 'a4', 'a1_GNE', 'a3', 'a6', 'a51', 'a41', 'a2', 'a32'}
+ng,sg a52_GNE {'a52_GNE', 'a4', 'a51', 'a42', 'a41'}
+ng,sg a1_GNE {'a5', 'a31', 'a4', 'a1_GNE', 'a3', 'a32', 'a6', 'a2'}
+
+ng,sg a1_GNE {'a5', 'a31', 'a4', 'a1_GNE', 'a3', 'a32', 'a6', 'a2'}
+Have Ring
+
+Links Down: (('a5', 'a4'), ('a5', 'a1_GNE'))
+Dependent Nodes: {'a5'}
+Links Down: (('a5', 'a4'), ('a31', 'a3'))
+Dependent Nodes: {'a31', 'a32'}
+Links Down: (('a5', 'a4'), ('a31', 'a32'))
+Dependent Nodes: {'a32'}
+Links Down: (('a5', 'a4'), ('a4', 'a3'))
+Dependent Nodes: {'a4'}
+Links Down: (('a5', 'a4'), ('a1_GNE', 'a2'))
+Dependent Nodes: {'a31', 'a4', 'a3', 'a32', 'a2'}
+Links Down: (('a5', 'a4'), ('a1_GNE', 'a6'))
+Dependent Nodes: {'a6'}
+Links Down: (('a5', 'a4'), ('a3', 'a2'))
+Dependent Nodes: {'a4', 'a3', 'a31', 'a32'}
+Links Down: (('a5', 'a1_GNE'), ('a31', 'a3'))
+Dependent Nodes: {'a31', 'a32'}
+Links Down: (('a5', 'a1_GNE'), ('a31', 'a32'))
+Dependent Nodes: {'a32'}
+Links Down: (('a5', 'a1_GNE'), ('a4', 'a3'))
+Dependent Nodes: {'a4', 'a5'}
+Links Down: (('a5', 'a1_GNE'), ('a1_GNE', 'a2'))
+Dependent Nodes: {'a5', 'a31', 'a4', 'a3', 'a32', 'a2'}
+Links Down: (('a5', 'a1_GNE'), ('a1_GNE', 'a6'))
+Dependent Nodes: {'a6'}
+Links Down: (('a5', 'a1_GNE'), ('a3', 'a2'))
+Dependent Nodes: {'a5', 'a31', 'a4', 'a3', 'a32'}
+Links Down: (('a31', 'a3'), ('a31', 'a32'))
+Dependent Nodes: {'a31'}{'a32'}
+Links Down: (('a31', 'a3'), ('a4', 'a3'))
+Dependent Nodes: {'a31', 'a32'}
+Links Down: (('a31', 'a3'), ('a1_GNE', 'a2'))
+Dependent Nodes: {'a31', 'a32'}
+Links Down: (('a31', 'a3'), ('a1_GNE', 'a6'))
+Dependent Nodes: {'a31', 'a32'}{'a6'}
+Links Down: (('a31', 'a3'), ('a3', 'a2'))
+Dependent Nodes: {'a31', 'a32'}
+Links Down: (('a31', 'a32'), ('a4', 'a3'))
+Dependent Nodes: {'a32'}
+Links Down: (('a31', 'a32'), ('a1_GNE', 'a2'))
+Dependent Nodes: {'a32'}
+Links Down: (('a31', 'a32'), ('a1_GNE', 'a6'))
+Dependent Nodes: {'a32'}{'a6'}
+Links Down: (('a31', 'a32'), ('a3', 'a2'))
+Dependent Nodes: {'a32'}
+Links Down: (('a4', 'a3'), ('a1_GNE', 'a2'))
+Dependent Nodes: {'a2', 'a3', 'a31', 'a32'}
+Links Down: (('a4', 'a3'), ('a1_GNE', 'a6'))
+Dependent Nodes: {'a6'}
+Links Down: (('a4', 'a3'), ('a3', 'a2'))
+Dependent Nodes: {'a3', 'a31', 'a32'}
+Links Down: (('a1_GNE', 'a2'), ('a1_GNE', 'a6'))
+Dependent Nodes: {'a6'}
+Links Down: (('a1_GNE', 'a2'), ('a3', 'a2'))
+Dependent Nodes: {'a2'}
+Links Down: (('a1_GNE', 'a6'), ('a3', 'a2'))
+Dependent Nodes: {'a6'}
+
+ng,sg a52_GNE {'a52_GNE', 'a4', 'a51', 'a42', 'a41'}
+Dont have Rings
+
+Link Down: ('a52_GNE', 'a51')
+Dependent Nodes: {'a51'}
+Link Down: ('a52_GNE', 'a41')
+Dependent Nodes: {'a41', 'a4', 'a42'}
+Link Down: ('a4', 'a41')
+Dependent Nodes: {'a4'}
+Link Down: ('a42', 'a41')
+Dependent Nodes: {'a42'}main graphs {'a11', 'a12', 'a10_GNE', 'a15', 'a14', 'a13_GNE', 'a16'}
+ng,sg a10_GNE {'a12', 'a10_GNE', 'a11'}
+Dont have Rings
+
+Link Down: ('a12', 'a11')
+Dependent Nodes: {'a12'}
+Link Down: ('a10_GNE', 'a11')
+Dependent Nodes: {'a12', 'a11'}ng,sg a13_GNE {'a11', 'a12', 'a15', 'a14', 'a13_GNE', 'a16'}
+Dont have Rings
+
+Link Down: ('a11', 'a12')
+Dependent Nodes: {'a12'}
+Link Down: ('a11', 'a13_GNE')
+Dependent Nodes: {'a12', 'a11'}
+Link Down: ('a15', 'a13_GNE')
+Dependent Nodes: {'a15'}
+Link Down: ('a14', 'a13_GNE')
+Dependent Nodes: {'a14', 'a16'}
+Link Down: ('a14', 'a16')
+Dependent Nodes: {'a16'}
+Process finished with exit code 0

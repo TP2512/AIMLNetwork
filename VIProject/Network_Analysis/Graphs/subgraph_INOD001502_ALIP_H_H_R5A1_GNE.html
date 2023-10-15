@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 600px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "INOD003012_MADH_H_H_R5A1", "label": "INOD003012_MADH_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102155_TRSH_H_H_R5A1", "label": "IDOD102155_TRSH_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102723_SULA_H_H_R5A1", "label": "IDOD102723_SULA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102713_KKRD_H_H_R5A1", "label": "IDOD102713_KKRD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101161_ALGM_H_H_R5A1", "label": "IDOD101161_ALGM_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100709_SUPR_H_H_R5A1", "label": "IDOD100709_SUPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001465_BBPR_I_H_R051", "label": "INOD001465_BBPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000836_BHIT_H_H_R5A1", "label": "INOD000836_BHIT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001502_ALIP_H_H_R5A1_GNE", "label": "INOD001502_ALIP_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101142_SUPR_H_H_R5A2", "label": "IDOD101142_SUPR_H_H_R5A2", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000066_DGPR_I_H_R5A1_GNE", "label": "INOD000066_DGPR_I_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003947_MDBD_H_H_R5A1", "label": "INOD003947_MDBD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100705_GNGD_H_H_R5A1", "label": "IDOD100705_GNGD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002039_KNGN_H_H_R051", "label": "INOD002039_KNGN_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101482_BLPT_H_H_R5A1", "label": "IDOD101482_BLPT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102056_NHRN_H_H_R5A1", "label": "IDOD102056_NHRN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100878_CAPR_H_H_R5A1", "label": "IDOD100878_CAPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003135_SITH_H_H_R5A1", "label": "INOD003135_SITH_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101060_TRCN_H_H_R5A3", "label": "IDOD101060_TRCN_H_H_R5A3", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100487_ANSR_H_H_R5A1", "label": "IDOD100487_ANSR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101539_BORL_H_H_R5A1", "label": "IDOD101539_BORL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102519_CHPR_H_H_R5A1", "label": "IDOD102519_CHPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101763_NDGA_H_H_R5A1", "label": "IDOD101763_NDGA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100930_PURI_H_H_R5A1", "label": "IDOD100930_PURI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100988_JGBR_H_H_R5A1", "label": "IDOD100988_JGBR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100887_KTPD_H_H_R5A1_GNE", "label": "IDOD100887_KTPD_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002970_STKS_I_H_R051", "label": "INOD002970_STKS_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000381_ROBG_H_H_R051", "label": "INOD000381_ROBG_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001861_STBD_I_H_R051", "label": "INOD001861_STBD_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000233_SOTD_H_H_R5A1", "label": "INOD000233_SOTD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100079_MNJG_H_H_R5A1_GNE", "label": "IDOD100079_MNJG_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102715_TLPD_H_H_R5A1", "label": "IDOD102715_TLPD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102594_BHOD_H_H_R5A1", "label": "IDOD102594_BHOD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101894_NGHT_H_H_R5A1", "label": "IDOD101894_NGHT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002928_KHAN_H_H_R5A1", "label": "INOD002928_KHAN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002883_SANT_H_H_R5A1", "label": "INOD002883_SANT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102249_ALKN_H_H_R5A1", "label": "IDOD102249_ALKN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000639_PURI_H_H_R5A1", "label": "INOD000639_PURI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101074_BBPR_H_H_R5A1", "label": "IDOD101074_BBPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003341_DHAN_H_H_R5A1", "label": "INOD003341_DHAN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100029_BGRP_H_H_R5A1", "label": "IDOD100029_BGRP_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003857_BODA_H_H_R5A1", "label": "INOD003857_BODA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001637_KBRJ_I_H_R051", "label": "INOD001637_KBRJ_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102556_GORD_H_H_R5A1", "label": "IDOD102556_GORD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000359_SULA_P_N_R5A1", "label": "INOD000359_SULA_P_N_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002487_CHAU_H_H_R5A1", "label": "INOD002487_CHAU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101732_CRNL_H_H_R5A1", "label": "IDOD101732_CRNL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002892_NOWN_I_H_R5A1", "label": "INOD002892_NOWN_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100153_BLRA_H_H_R5A1_GNE", "label": "IDOD100153_BLRA_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100618_GTPR_H_H_R5A1_GNE", "label": "IDOD100618_GTPR_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001320_BADA_H_H_R5A3", "label": "INOD001320_BADA_H_H_R5A3", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000865_PURI_H_H_R5A1_GNE", "label": "INOD000865_PURI_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002745_CHPR_I_H_R5A1", "label": "INOD002745_CHPR_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100444_BNTP_H_H_R5A1", "label": "IDOD100444_BNTP_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100703_AMSL_H_H_R5A1", "label": "IDOD100703_AMSL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102036_KNAS_H_H_R5A1", "label": "IDOD102036_KNAS_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000329_NARA_H_H_R5A1", "label": "INOD000329_NARA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001958_SARI_H_H_R5A1", "label": "INOD001958_SARI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101160_JMGN_H_H_R5A1", "label": "IDOD101160_JMGN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002949_KBRJ_I_H_R052", "label": "INOD002949_KBRJ_I_H_R052", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003938_PURI_H_H_R051", "label": "INOD003938_PURI_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002807_GSPR_H_H_R5A1", "label": "INOD002807_GSPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001383_BLTH_H_H_R5A1_GNE", "label": "INOD001383_BLTH_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD200871_PURI_H_H_R051", "label": "INOD200871_PURI_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003855_OTSN_I_H_R052", "label": "INOD003855_OTSN_I_H_R052", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000211_RAEP_H_H_R5A1", "label": "INOD000211_RAEP_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD200929_PKBS_H_H_R5A1", "label": "INOD200929_PKBS_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100403_NAGR_H_H_R5A1", "label": "IDOD100403_NAGR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102547_RYPR_H_H_R5A1", "label": "IDOD102547_RYPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101641_GTPR_H_H_R5A1", "label": "IDOD101641_GTPR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000912_MBST_H_H_R051", "label": "INOD000912_MBST_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100456_SMGL_H_H_R5A1", "label": "IDOD100456_SMGL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102275_GODA_H_H_R5A1", "label": "IDOD102275_GODA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001264_TSPR_I_H_R5A1", "label": "INOD001264_TSPR_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102248_PAPU_H_H_R5A1", "label": "IDOD102248_PAPU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001937_JAYA_H_H_R5A1", "label": "INOD001937_JAYA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101360_ANSR_H_H_R5A1", "label": "IDOD101360_ANSR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101150_ODSP_H_H_R5A1_GNE", "label": "IDOD101150_ODSP_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000096_BBPR_I_H_R5A1_GNE", "label": "INOD000096_BBPR_I_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003811_NAIG_H_H_R5A1", "label": "INOD003811_NAIG_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101219_DNKI_H_H_R5A1", "label": "IDOD101219_DNKI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102412_STBD_H_H_R5A1", "label": "IDOD102412_STBD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001264_TSPR_I_H_R051", "label": "INOD001264_TSPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102092_PHNG_H_H_R5A1", "label": "IDOD102092_PHNG_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002444_KNRK_H_H_R5A1", "label": "INOD002444_KNRK_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100066_BGDP_H_H_R5A1_GNE", "label": "IDOD100066_BGDP_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003130_PRPT_I_H_R5A1", "label": "INOD003130_PRPT_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100946_CRCK_H_H_R5A1_GNE", "label": "IDOD100946_CRCK_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002949_KBRJ_I_H_R051", "label": "INOD002949_KBRJ_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102288_ADNG_H_H_R5A1", "label": "IDOD102288_ADNG_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003560_CHAT_H_H_R5A1", "label": "INOD003560_CHAT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002720_CHPR_I_H_R051", "label": "INOD002720_CHPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100189_ATRG_H_H_R5A1", "label": "IDOD100189_ATRG_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101853_PURI_H_H_R5A1_GNE", "label": "IDOD101853_PURI_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100066_BGDP_I_H_R053_GNE", "label": "IDOD100066_BGDP_I_H_R053_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001416_POSD_I_H_R5A1", "label": "INOD001416_POSD_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100972_DMRI_H_H_R5A1", "label": "IDOD100972_DMRI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003228_SANG_H_H_R5A3_GNE", "label": "INOD003228_SANG_H_H_R5A3_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101030_BAKD_H_H_R5A1", "label": "IDOD101030_BAKD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102030_PNPL_H_H_R5A1", "label": "IDOD102030_PNPL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102537_NHRN_H_H_R5A1", "label": "IDOD102537_NHRN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101470_KNAG_H_H_R5A1", "label": "IDOD101470_KNAG_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100944_LHRN_H_H_R5A1", "label": "IDOD100944_LHRN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101487_BPLA_H_H_R5A1_GNE", "label": "IDOD101487_BPLA_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101846_NALI_H_H_R5A1", "label": "IDOD101846_NALI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101852_PURI_H_H_R5A1_GNE", "label": "IDOD101852_PURI_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002979_SHGP_I_H_R5A1", "label": "INOD002979_SHGP_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100141_SHGP_I_H_R501", "label": "IDOD100141_SHGP_I_H_R501", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102509_BAGU_H_H_R5A1", "label": "IDOD102509_BAGU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101734_KTPU_H_H_R5A1", "label": "IDOD101734_KTPU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100924_TLPD_H_H_R5A1", "label": "IDOD100924_TLPD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102178_JGBR_H_H_R5A1", "label": "IDOD102178_JGBR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002492_MNGP_I_H_R051", "label": "INOD002492_MNGP_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003046_KQR0_H_H_R5A3_GNE", "label": "INOD003046_KQR0_H_H_R5A3_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001129_BTGO_I_H_R5A1_GNE", "label": "INOD001129_BTGO_I_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100940_HYCL_H_H_R5A1_GNE", "label": "IDOD100940_HYCL_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102230_KSGP_H_H_R5A1", "label": "IDOD102230_KSGP_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101124_NAGP_H_H_R5A1", "label": "IDOD101124_NAGP_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000338_HARI_H_H_R5A3", "label": "INOD000338_HARI_H_H_R5A3", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000752_BTSG_I_H_R051", "label": "INOD000752_BTSG_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101184_BAKD_H_H_R5A1", "label": "IDOD101184_BAKD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100384_GPKD_H_H_R5A1", "label": "IDOD100384_GPKD_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101642_MCGN_H_H_R5A1", "label": "IDOD101642_MCGN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101732_PURI_I_H_R053", "label": "IDOD101732_PURI_I_H_R053", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101158_DGGL_H_H_R5A1", "label": "IDOD101158_DGGL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101640_BGDI_H_H_R5A1", "label": "IDOD101640_BGDI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003586_AOPA_H_H_R5A1", "label": "INOD003586_AOPA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002860_PPLI_I_H_R052", "label": "INOD002860_PPLI_I_H_R052", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100562_PURI_H_H_R5A1", "label": "IDOD100562_PURI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003288_IOCL_I_H_R051", "label": "INOD003288_IOCL_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001482_BAJA_H_H_R5A1_GNE", "label": "INOD001482_BAJA_H_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102579_PURI_H_H_R051", "label": "IDOD102579_PURI_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101495_MBST_H_H_R5A1", "label": "IDOD101495_MBST_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101406_BLTH_H_H_R5A1", "label": "IDOD101406_BLTH_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001166_BBPR_I_H_R051", "label": "INOD001166_BBPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001289_OLAT_H_H_R5A1", "label": "INOD001289_OLAT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102052_PNTR_H_H_R5A1", "label": "IDOD102052_PNTR_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003497_KTPU_H_H_R5A1", "label": "INOD003497_KTPU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101629_PURI_H_H_R051", "label": "IDOD101629_PURI_H_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100868_GOPN_I_H_R5A1", "label": "IDOD100868_GOPN_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003690_MAKA_H_H_R5A1", "label": "INOD003690_MAKA_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101070_IPDL_H_H_R5A1", "label": "IDOD101070_IPDL_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100937_AGLI_H_H_R5A1", "label": "IDOD100937_AGLI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003834_BDIP_I_H_R5A1", "label": "INOD003834_BDIP_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003462_NLKN_H_H_R5A1", "label": "INOD003462_NLKN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100539_PRHT_H_H_R5A1", "label": "IDOD100539_PRHT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003075_BHAT_H_H_R5A1", "label": "INOD003075_BHAT_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100930_PURI_I_H_R053", "label": "IDOD100930_PURI_I_H_R053", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101324_KNAS_H_H_R5A1", "label": "IDOD101324_KNAS_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100693_KUJN_H_H_R5A1", "label": "IDOD100693_KUJN_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102658_PURI_H_H_R5A1", "label": "IDOD102658_PURI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100976_PNDU_H_H_R5A1", "label": "IDOD100976_PNDU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102455_PKBS_H_H_R5A1", "label": "IDOD102455_PKBS_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100904_PURI_H_H_R5A1", "label": "IDOD100904_PURI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002597_BOPU_H_H_R5A1", "label": "INOD002597_BOPU_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001529_KHAI_H_H_R5A1", "label": "INOD001529_KHAI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101240_HOTI_H_H_R5A1", "label": "IDOD101240_HOTI_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003856_BNLO_H_H_R5A1", "label": "INOD003856_BNLO_H_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003129_JPSN_I_H_R051", "label": "INOD003129_JPSN_I_H_R051", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "INOD003012_MADH_H_H_R5A1", "to": "IDOD100618_GTPR_H_H_R5A1_GNE"}, {"from": "INOD003012_MADH_H_H_R5A1", "to": "INOD002039_KNGN_H_H_R051"}, {"from": "IDOD102155_TRSH_H_H_R5A1", "to": "IDOD101642_MCGN_H_H_R5A1"}, {"from": "IDOD102723_SULA_H_H_R5A1", "to": "IDOD100066_BGDP_H_H_R5A1_GNE"}, {"from": "IDOD102713_KKRD_H_H_R5A1", "to": "IDOD101406_BLTH_H_H_R5A1"}, {"from": "IDOD102713_KKRD_H_H_R5A1", "to": "IDOD101219_DNKI_H_H_R5A1"}, {"from": "IDOD101161_ALGM_H_H_R5A1", "to": "IDOD101070_IPDL_H_H_R5A1"}, {"from": "IDOD101161_ALGM_H_H_R5A1", "to": "INOD000359_SULA_P_N_R5A1"}, {"from": "IDOD101161_ALGM_H_H_R5A1", "to": "INOD001937_JAYA_H_H_R5A1"}, {"from": "IDOD100709_SUPR_H_H_R5A1", "to": "IDOD102178_JGBR_H_H_R5A1"}, {"from": "IDOD100709_SUPR_H_H_R5A1", "to": "INOD003497_KTPU_H_H_R5A1"}, {"from": "INOD001465_BBPR_I_H_R051", "to": "INOD000096_BBPR_I_H_R5A1_GNE"}, {"from": "INOD000836_BHIT_H_H_R5A1", "to": "INOD003462_NLKN_H_H_R5A1"}, {"from": "INOD000836_BHIT_H_H_R5A1", "to": "IDOD101470_KNAG_H_H_R5A1"}, {"from": "INOD001502_ALIP_H_H_R5A1_GNE", "to": "IDOD100618_GTPR_H_H_R5A1_GNE"}, {"from": "INOD001502_ALIP_H_H_R5A1_GNE", "to": "IDOD100079_MNJG_H_H_R5A1_GNE"}, {"from": "INOD001502_ALIP_H_H_R5A1_GNE", "to": "IDOD101150_ODSP_H_H_R5A1_GNE"}, {"from": "INOD001502_ALIP_H_H_R5A1_GNE", "to": "INOD001529_KHAI_H_H_R5A1"}, {"from": "INOD001502_ALIP_H_H_R5A1_GNE", "to": "INOD003135_SITH_H_H_R5A1"}, {"from": "IDOD101142_SUPR_H_H_R5A2", "to": "INOD002928_KHAN_H_H_R5A1"}, {"from": "IDOD101142_SUPR_H_H_R5A2", "to": "INOD003855_OTSN_I_H_R052"}, {"from": "INOD000066_DGPR_I_H_R5A1_GNE", "to": "IDOD100066_BGDP_I_H_R053_GNE"}, {"from": "INOD000066_DGPR_I_H_R5A1_GNE", "to": "INOD002745_CHPR_I_H_R5A1"}, {"from": "INOD003947_MDBD_H_H_R5A1", "to": "IDOD100079_MNJG_H_H_R5A1_GNE"}, {"from": "IDOD100705_GNGD_H_H_R5A1", "to": "INOD003857_BODA_H_H_R5A1"}, {"from": "IDOD100705_GNGD_H_H_R5A1", "to": "IDOD101642_MCGN_H_H_R5A1"}, {"from": "INOD002039_KNGN_H_H_R051", "to": "INOD000912_MBST_H_H_R051"}, {"from": "IDOD101482_BLPT_H_H_R5A1", "to": "INOD200929_PKBS_H_H_R5A1"}, {"from": "IDOD101482_BLPT_H_H_R5A1", "to": "IDOD101150_ODSP_H_H_R5A1_GNE"}, {"from": "IDOD102056_NHRN_H_H_R5A1", "to": "IDOD102537_NHRN_H_H_R5A1"}, {"from": "IDOD102056_NHRN_H_H_R5A1", "to": "IDOD100403_NAGR_H_H_R5A1"}, {"from": "IDOD102056_NHRN_H_H_R5A1", "to": "IDOD102052_PNTR_H_H_R5A1"}, {"from": "IDOD100878_CAPR_H_H_R5A1", "to": "IDOD101852_PURI_H_H_R5A1_GNE"}, {"from": "IDOD100878_CAPR_H_H_R5A1", "to": "IDOD101732_CRNL_H_H_R5A1"}, {"from": "INOD003135_SITH_H_H_R5A1", "to": "IDOD102092_PHNG_H_H_R5A1"}, {"from": "IDOD101060_TRCN_H_H_R5A3", "to": "IDOD101219_DNKI_H_H_R5A1"}, {"from": "IDOD101060_TRCN_H_H_R5A3", "to": "IDOD101640_BGDI_H_H_R5A1"}, {"from": "IDOD100487_ANSR_H_H_R5A1", "to": "IDOD102455_PKBS_H_H_R5A1"}, {"from": "IDOD100487_ANSR_H_H_R5A1", "to": "IDOD101360_ANSR_H_H_R5A1"}, {"from": "IDOD101539_BORL_H_H_R5A1", "to": "IDOD102249_ALKN_H_H_R5A1"}, {"from": "IDOD102519_CHPR_H_H_R5A1", "to": "IDOD101158_DGGL_H_H_R5A1"}, {"from": "IDOD101763_NDGA_H_H_R5A1", "to": "IDOD102594_BHOD_H_H_R5A1"}, {"from": "IDOD101763_NDGA_H_H_R5A1", "to": "IDOD101160_JMGN_H_H_R5A1"}, {"from": "IDOD100930_PURI_H_H_R5A1", "to": "IDOD101074_BBPR_H_H_R5A1"}, {"from": "IDOD100930_PURI_H_H_R5A1", "to": "IDOD100562_PURI_H_H_R5A1"}, {"from": "IDOD100930_PURI_H_H_R5A1", "to": "IDOD101732_CRNL_H_H_R5A1"}, {"from": "IDOD100988_JGBR_H_H_R5A1", "to": "IDOD102178_JGBR_H_H_R5A1"}, {"from": "IDOD100988_JGBR_H_H_R5A1", "to": "INOD002487_CHAU_H_H_R5A1"}, {"from": "IDOD100887_KTPD_H_H_R5A1_GNE", "to": "IDOD101487_BPLA_H_H_R5A1_GNE"}, {"from": "IDOD100887_KTPD_H_H_R5A1_GNE", "to": "INOD002883_SANT_H_H_R5A1"}, {"from": "INOD002970_STKS_I_H_R051", "to": "INOD001264_TSPR_I_H_R051"}, {"from": "INOD000381_ROBG_H_H_R051", "to": "IDOD101240_HOTI_H_H_R5A1"}, {"from": "INOD000381_ROBG_H_H_R051", "to": "INOD003586_AOPA_H_H_R5A1"}, {"from": "INOD001861_STBD_I_H_R051", "to": "INOD002979_SHGP_I_H_R5A1"}, {"from": "INOD001861_STBD_I_H_R051", "to": "INOD001637_KBRJ_I_H_R051"}, {"from": "INOD000233_SOTD_H_H_R5A1", "to": "INOD002892_NOWN_I_H_R5A1"}, {"from": "IDOD100079_MNJG_H_H_R5A1_GNE", "to": "IDOD100924_TLPD_H_H_R5A1"}, {"from": "IDOD100079_MNJG_H_H_R5A1_GNE", "to": "IDOD101487_BPLA_H_H_R5A1_GNE"}, {"from": "IDOD102715_TLPD_H_H_R5A1", "to": "IDOD100976_PNDU_H_H_R5A1"}, {"from": "IDOD102715_TLPD_H_H_R5A1", "to": "IDOD100924_TLPD_H_H_R5A1"}, {"from": "IDOD102594_BHOD_H_H_R5A1", "to": "IDOD102288_ADNG_H_H_R5A1"}, {"from": "IDOD101894_NGHT_H_H_R5A1", "to": "INOD003857_BODA_H_H_R5A1"}, {"from": "INOD002928_KHAN_H_H_R5A1", "to": "IDOD102509_BAGU_H_H_R5A1"}, {"from": "INOD002928_KHAN_H_H_R5A1", "to": "IDOD100693_KUJN_H_H_R5A1"}, {"from": "INOD002883_SANT_H_H_R5A1", "to": "IDOD100456_SMGL_H_H_R5A1"}, {"from": "IDOD102249_ALKN_H_H_R5A1", "to": "IDOD101030_BAKD_H_H_R5A1"}, {"from": "INOD000639_PURI_H_H_R5A1", "to": "IDOD100904_PURI_H_H_R5A1"}, {"from": "IDOD101074_BBPR_H_H_R5A1", "to": "IDOD100904_PURI_H_H_R5A1"}, {"from": "IDOD101074_BBPR_H_H_R5A1", "to": "IDOD101732_CRNL_H_H_R5A1"}, {"from": "INOD003341_DHAN_H_H_R5A1", "to": "IDOD101070_IPDL_H_H_R5A1"}, {"from": "INOD003341_DHAN_H_H_R5A1", "to": "IDOD102036_KNAS_H_H_R5A1"}, {"from": "IDOD100029_BGRP_H_H_R5A1", "to": "IDOD100153_BLRA_H_H_R5A1_GNE"}, {"from": "IDOD100029_BGRP_H_H_R5A1", "to": "IDOD100444_BNTP_H_H_R5A1"}, {"from": "INOD001637_KBRJ_I_H_R051", "to": "INOD002949_KBRJ_I_H_R052"}, {"from": "INOD001637_KBRJ_I_H_R051", "to": "INOD002720_CHPR_I_H_R051"}, {"from": "IDOD102556_GORD_H_H_R5A1", "to": "IDOD101240_HOTI_H_H_R5A1"}, {"from": "IDOD102556_GORD_H_H_R5A1", "to": "INOD002597_BOPU_H_H_R5A1"}, {"from": "INOD002487_CHAU_H_H_R5A1", "to": "IDOD100946_CRCK_H_H_R5A1_GNE"}, {"from": "INOD002892_NOWN_I_H_R5A1", "to": "INOD001416_POSD_I_H_R5A1"}, {"from": "IDOD100153_BLRA_H_H_R5A1_GNE", "to": "IDOD101150_ODSP_H_H_R5A1_GNE"}, {"from": "IDOD100153_BLRA_H_H_R5A1_GNE", "to": "INOD000211_RAEP_H_H_R5A1"}, {"from": "IDOD100618_GTPR_H_H_R5A1_GNE", "to": "IDOD101150_ODSP_H_H_R5A1_GNE"}, {"from": "IDOD100618_GTPR_H_H_R5A1_GNE", "to": "IDOD101846_NALI_H_H_R5A1"}, {"from": "IDOD100618_GTPR_H_H_R5A1_GNE", "to": "IDOD100946_CRCK_H_H_R5A1_GNE"}, {"from": "IDOD100618_GTPR_H_H_R5A1_GNE", "to": "IDOD101641_GTPR_H_H_R5A1"}, {"from": "INOD001320_BADA_H_H_R5A3", "to": "INOD002807_GSPR_H_H_R5A1"}, {"from": "INOD001320_BADA_H_H_R5A3", "to": "IDOD101360_ANSR_H_H_R5A1"}, {"from": "INOD000865_PURI_H_H_R5A1_GNE", "to": "INOD003938_PURI_H_H_R051"}, {"from": "INOD000865_PURI_H_H_R5A1_GNE", "to": "IDOD100904_PURI_H_H_R5A1"}, {"from": "INOD002745_CHPR_I_H_R5A1", "to": "INOD003130_PRPT_I_H_R5A1"}, {"from": "IDOD100703_AMSL_H_H_R5A1", "to": "IDOD101642_MCGN_H_H_R5A1"}, {"from": "IDOD100703_AMSL_H_H_R5A1", "to": "IDOD102288_ADNG_H_H_R5A1"}, {"from": "IDOD102036_KNAS_H_H_R5A1", "to": "IDOD101324_KNAS_H_H_R5A1"}, {"from": "INOD000329_NARA_H_H_R5A1", "to": "IDOD100937_AGLI_H_H_R5A1"}, {"from": "INOD000329_NARA_H_H_R5A1", "to": "IDOD102275_GODA_H_H_R5A1"}, {"from": "INOD001958_SARI_H_H_R5A1", "to": "INOD003856_BNLO_H_H_R5A1"}, {"from": "INOD001958_SARI_H_H_R5A1", "to": "IDOD100189_ATRG_H_H_R5A1"}, {"from": "INOD001958_SARI_H_H_R5A1", "to": "INOD001482_BAJA_H_H_R5A1_GNE"}, {"from": "IDOD101160_JMGN_H_H_R5A1", "to": "INOD003075_BHAT_H_H_R5A1"}, {"from": "INOD002949_KBRJ_I_H_R052", "to": "INOD002949_KBRJ_I_H_R051"}, {"from": "INOD002807_GSPR_H_H_R5A1", "to": "IDOD101124_NAGP_H_H_R5A1"}, {"from": "INOD002807_GSPR_H_H_R5A1", "to": "IDOD100940_HYCL_H_H_R5A1_GNE"}, {"from": "INOD001383_BLTH_H_H_R5A1_GNE", "to": "IDOD101406_BLTH_H_H_R5A1"}, {"from": "INOD001383_BLTH_H_H_R5A1_GNE", "to": "INOD003560_CHAT_H_H_R5A1"}, {"from": "INOD200871_PURI_H_H_R051", "to": "IDOD101629_PURI_H_H_R051"}, {"from": "IDOD100403_NAGR_H_H_R5A1", "to": "INOD003811_NAIG_H_H_R5A1"}, {"from": "IDOD100403_NAGR_H_H_R5A1", "to": "IDOD100189_ATRG_H_H_R5A1"}, {"from": "IDOD102547_RYPR_H_H_R5A1", "to": "IDOD102230_KSGP_H_H_R5A1"}, {"from": "IDOD102547_RYPR_H_H_R5A1", "to": "IDOD100539_PRHT_H_H_R5A1"}, {"from": "IDOD101641_GTPR_H_H_R5A1", "to": "IDOD101846_NALI_H_H_R5A1"}, {"from": "INOD000912_MBST_H_H_R051", "to": "IDOD101495_MBST_H_H_R5A1"}, {"from": "IDOD100456_SMGL_H_H_R5A1", "to": "IDOD102030_PNPL_H_H_R5A1"}, {"from": "IDOD100456_SMGL_H_H_R5A1", "to": "IDOD100384_GPKD_H_H_R5A1"}, {"from": "IDOD102275_GODA_H_H_R5A1", "to": "INOD000338_HARI_H_H_R5A3"}, {"from": "INOD001264_TSPR_I_H_R5A1", "to": "INOD001264_TSPR_I_H_R051"}, {"from": "INOD001264_TSPR_I_H_R5A1", "to": "INOD003129_JPSN_I_H_R051"}, {"from": "IDOD102248_PAPU_H_H_R5A1", "to": "INOD000338_HARI_H_H_R5A3"}, {"from": "INOD001937_JAYA_H_H_R5A1", "to": "IDOD102412_STBD_H_H_R5A1"}, {"from": "IDOD101150_ODSP_H_H_R5A1_GNE", "to": "INOD001289_OLAT_H_H_R5A1"}, {"from": "IDOD101150_ODSP_H_H_R5A1_GNE", "to": "IDOD100972_DMRI_H_H_R5A1"}, {"from": "INOD000096_BBPR_I_H_R5A1_GNE", "to": "INOD001129_BTGO_I_H_R5A1_GNE"}, {"from": "INOD000096_BBPR_I_H_R5A1_GNE", "to": "INOD000752_BTSG_I_H_R051"}, {"from": "INOD000096_BBPR_I_H_R5A1_GNE", "to": "INOD002860_PPLI_I_H_R052"}, {"from": "INOD003811_NAIG_H_H_R5A1", "to": "IDOD100944_LHRN_H_H_R5A1"}, {"from": "IDOD101219_DNKI_H_H_R5A1", "to": "INOD003046_KQR0_H_H_R5A3_GNE"}, {"from": "IDOD101219_DNKI_H_H_R5A1", "to": "INOD003288_IOCL_I_H_R051"}, {"from": "IDOD102412_STBD_H_H_R5A1", "to": "IDOD100066_BGDP_H_H_R5A1_GNE"}, {"from": "INOD001264_TSPR_I_H_R051", "to": "INOD002492_MNGP_I_H_R051"}, {"from": "IDOD102092_PHNG_H_H_R5A1", "to": "INOD003075_BHAT_H_H_R5A1"}, {"from": "INOD002444_KNRK_H_H_R5A1", "to": "IDOD102455_PKBS_H_H_R5A1"}, {"from": "INOD002444_KNRK_H_H_R5A1", "to": "IDOD100693_KUJN_H_H_R5A1"}, {"from": "IDOD100066_BGDP_H_H_R5A1_GNE", "to": "IDOD101158_DGGL_H_H_R5A1"}, {"from": "IDOD100066_BGDP_H_H_R5A1_GNE", "to": "IDOD100066_BGDP_I_H_R053_GNE"}, {"from": "IDOD100066_BGDP_H_H_R5A1_GNE", "to": "IDOD101853_PURI_H_H_R5A1_GNE"}, {"from": "INOD003130_PRPT_I_H_R5A1", "to": "INOD003834_BDIP_I_H_R5A1"}, {"from": "INOD002949_KBRJ_I_H_R051", "to": "INOD001166_BBPR_I_H_R051"}, {"from": "INOD003560_CHAT_H_H_R5A1", "to": "IDOD101487_BPLA_H_H_R5A1_GNE"}, {"from": "INOD002720_CHPR_I_H_R051", "to": "INOD001129_BTGO_I_H_R5A1_GNE"}, {"from": "IDOD101853_PURI_H_H_R5A1_GNE", "to": "IDOD100904_PURI_H_H_R5A1"}, {"from": "IDOD101853_PURI_H_H_R5A1_GNE", "to": "INOD003586_AOPA_H_H_R5A1"}, {"from": "IDOD100066_BGDP_I_H_R053_GNE", "to": "IDOD100141_SHGP_I_H_R501"}, {"from": "INOD001416_POSD_I_H_R5A1", "to": "IDOD100868_GOPN_I_H_R5A1"}, {"from": "INOD003228_SANG_H_H_R5A3_GNE", "to": "IDOD101184_BAKD_H_H_R5A1"}, {"from": "INOD003228_SANG_H_H_R5A3_GNE", "to": "IDOD100539_PRHT_H_H_R5A1"}, {"from": "IDOD101030_BAKD_H_H_R5A1", "to": "IDOD101184_BAKD_H_H_R5A1"}, {"from": "IDOD100944_LHRN_H_H_R5A1", "to": "IDOD101495_MBST_H_H_R5A1"}, {"from": "IDOD101487_BPLA_H_H_R5A1_GNE", "to": "INOD003462_NLKN_H_H_R5A1"}, {"from": "IDOD101852_PURI_H_H_R5A1_GNE", "to": "IDOD102579_PURI_H_H_R051"}, {"from": "IDOD101852_PURI_H_H_R5A1_GNE", "to": "IDOD100940_HYCL_H_H_R5A1_GNE"}, {"from": "INOD002979_SHGP_I_H_R5A1", "to": "IDOD100141_SHGP_I_H_R501"}, {"from": "IDOD102509_BAGU_H_H_R5A1", "to": "INOD003856_BNLO_H_H_R5A1"}, {"from": "IDOD101734_KTPU_H_H_R5A1", "to": "INOD003497_KTPU_H_H_R5A1"}, {"from": "INOD002492_MNGP_I_H_R051", "to": "INOD000752_BTSG_I_H_R051"}, {"from": "INOD001129_BTGO_I_H_R5A1_GNE", "to": "IDOD101732_PURI_I_H_R053"}, {"from": "IDOD102230_KSGP_H_H_R5A1", "to": "INOD001529_KHAI_H_H_R5A1"}, {"from": "IDOD101732_PURI_I_H_R053", "to": "IDOD100930_PURI_I_H_R053"}, {"from": "IDOD100562_PURI_H_H_R5A1", "to": "IDOD101629_PURI_H_H_R051"}, {"from": "IDOD100562_PURI_H_H_R5A1", "to": "IDOD102658_PURI_H_H_R5A1"}, {"from": "INOD001482_BAJA_H_H_R5A1_GNE", "to": "INOD003497_KTPU_H_H_R5A1"}, {"from": "INOD001166_BBPR_I_H_R051", "to": "INOD003690_MAKA_H_H_R5A1"}, {"from": "IDOD100868_GOPN_I_H_R5A1", "to": "INOD002597_BOPU_H_H_R5A1"}, {"from": "IDOD100937_AGLI_H_H_R5A1", "to": "IDOD100976_PNDU_H_H_R5A1"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "INOD000483_BMRI_I_H_R5A1", "label": "INOD000483_BMRI_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003563_JTPR_I_H_R051", "label": "INOD003563_JTPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001379_KUJG_I_H_R051_GNE", "label": "INOD001379_KUJG_I_H_R051_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002900_42MJ_I_H_R101", "label": "INOD002900_42MJ_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101790_BDJL_I_H_R101", "label": "IDOD101790_BDJL_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001605_PTKR_I_H_R101", "label": "INOD001605_PTKR_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002712_JTPR_I_H_R051", "label": "INOD002712_JTPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101392_JTPR_I_H_R501", "label": "IDOD101392_JTPR_I_H_R501", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000116_CTCK_I_H_R051_GNE", "label": "INOD000116_CTCK_I_H_R051_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001633_CTCK_I_H_R051", "label": "INOD001633_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000380_CTCK_I_H_R051", "label": "INOD000380_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000870_KHMG_I_H_R5A1", "label": "INOD000870_KHMG_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100348_BRBT_I_H_R501", "label": "IDOD100348_BRBT_I_H_R501", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102303_BDLH_I_H_R5A1", "label": "IDOD102303_BDLH_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002122_BLBH_I_H_R051", "label": "INOD002122_BLBH_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101013_SLPR_I_H_R501_GNE", "label": "IDOD101013_SLPR_I_H_R501_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002328_CTCK_I_H_R051", "label": "INOD002328_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002000_DLUN_I_H_R5A1", "label": "INOD002000_DLUN_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001848_NNDL_I_H_R5A1", "label": "INOD001848_NNDL_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000556_PTBM_I_H_R051", "label": "INOD000556_PTBM_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101729_CTCK_I_H_R051_GNE", "label": "IDOD101729_CTCK_I_H_R051_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001947_TRKD_I_H_R501_GNE", "label": "INOD001947_TRKD_I_H_R501_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101361_BLJG_I_H_R101", "label": "IDOD101361_BLJG_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD003166_ANKI_I_H_R101", "label": "INOD003166_ANKI_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002600_CTCK_I_H_R051", "label": "INOD002600_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001848_CTCK_I_H_R051", "label": "INOD001848_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101102_JTPR_I_H_R101", "label": "IDOD101102_JTPR_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002961_PKHD_I_H_R101", "label": "INOD002961_PKHD_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000483_BMRI_I_H_R101", "label": "INOD000483_BMRI_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000603_SAMJ_I_H_R051", "label": "INOD000603_SAMJ_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100924_TLPD_I_H_R503", "label": "IDOD100924_TLPD_I_H_R503", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001999_URSN_I_H_R101", "label": "INOD001999_URSN_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002033_CTCK_I_H_R052", "label": "INOD002033_CTCK_I_H_R052", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001605_PTKR_I_H_R501", "label": "INOD001605_PTKR_I_H_R501", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000340_SLGJ_I_H_R101", "label": "INOD000340_SLGJ_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002716_JTPR_I_H_R051", "label": "INOD002716_JTPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000603_SYMJ_I_H_R051", "label": "INOD000603_SYMJ_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000567_HLPD_I_H_R101", "label": "INOD000567_HLPD_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000740_CTCK_I_H_R051", "label": "INOD000740_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001305_JIPR_I_H_R501_GNE", "label": "INOD001305_JIPR_I_H_R501_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101393_JTPR_I_H_R051", "label": "IDOD101393_JTPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD102070_JTPR_I_H_R5A1_GNE", "label": "IDOD102070_JTPR_I_H_R5A1_GNE", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002458_PRBS_I_H_R101", "label": "INOD002458_PRBS_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101963_PRKL_I_H_R5A1", "label": "IDOD101963_PRKL_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001727_BLKK_I_H_R101", "label": "INOD001727_BLKK_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001894_KLBU_I_H_R051", "label": "INOD001894_KLBU_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD101112_JTPR_I_H_R051", "label": "IDOD101112_JTPR_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002985_CTCK_I_H_R051", "label": "INOD002985_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000340_SLJG_I_H_R5A1", "label": "INOD000340_SLJG_I_H_R5A1", "shape": "dot"}, {"color": "#97c2fc", "id": "IDOD100356_BRDI_I_H_R101", "label": "IDOD100356_BRDI_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002067_CTCK_I_H_R051", "label": "INOD002067_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000870_KHMG_I_H_R051", "label": "INOD000870_KHMG_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002603_SRLP_I_H_R101", "label": "INOD002603_SRLP_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001750_KIJG_I_H_R051", "label": "INOD001750_KIJG_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002481_TRKD_I_H_R051", "label": "INOD002481_TRKD_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002293_CHPL_I_H_R101", "label": "INOD002293_CHPL_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000838_CTCK_I_H_R051", "label": "INOD000838_CTCK_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000118_TRPR_I_H_R101", "label": "INOD000118_TRPR_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD000217_RDHU_I_H_R051", "label": "INOD000217_RDHU_I_H_R051", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD002866_42MJ_I_H_R101", "label": "INOD002866_42MJ_I_H_R101", "shape": "dot"}, {"color": "#97c2fc", "id": "INOD001278_BHRA_I_H_R101", "label": "INOD001278_BHRA_I_H_R101", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "INOD000483_BMRI_I_H_R5A1", "to": "INOD000483_BMRI_I_H_R101"}, {"from": "INOD000483_BMRI_I_H_R5A1", "to": "INOD001750_KIJG_I_H_R051"}, {"from": "INOD003563_JTPR_I_H_R051", "to": "INOD002716_JTPR_I_H_R051"}, {"from": "INOD003563_JTPR_I_H_R051", "to": "IDOD101112_JTPR_I_H_R051"}, {"from": "INOD001379_KUJG_I_H_R051_GNE", "to": "IDOD101013_SLPR_I_H_R501_GNE"}, {"from": "INOD001379_KUJG_I_H_R051_GNE", "to": "INOD000603_SAMJ_I_H_R051"}, {"from": "INOD002900_42MJ_I_H_R101", "to": "INOD001999_URSN_I_H_R101"}, {"from": "INOD002900_42MJ_I_H_R101", "to": "INOD000483_BMRI_I_H_R101"}, {"from": "IDOD101790_BDJL_I_H_R101", "to": "INOD002603_SRLP_I_H_R101"}, {"from": "INOD001605_PTKR_I_H_R101", "to": "IDOD101963_PRKL_I_H_R5A1"}, {"from": "INOD001605_PTKR_I_H_R101", "to": "INOD002961_PKHD_I_H_R101"}, {"from": "INOD001605_PTKR_I_H_R101", "to": "INOD001605_PTKR_I_H_R501"}, {"from": "INOD002712_JTPR_I_H_R051", "to": "INOD002716_JTPR_I_H_R051"}, {"from": "INOD002712_JTPR_I_H_R051", "to": "IDOD101393_JTPR_I_H_R051"}, {"from": "IDOD101392_JTPR_I_H_R501", "to": "IDOD102303_BDLH_I_H_R5A1"}, {"from": "IDOD101392_JTPR_I_H_R501", "to": "IDOD102070_JTPR_I_H_R5A1_GNE"}, {"from": "IDOD101392_JTPR_I_H_R501", "to": "IDOD101393_JTPR_I_H_R051"}, {"from": "IDOD101392_JTPR_I_H_R501", "to": "INOD001947_TRKD_I_H_R501_GNE"}, {"from": "IDOD101392_JTPR_I_H_R501", "to": "INOD001305_JIPR_I_H_R501_GNE"}, {"from": "IDOD101392_JTPR_I_H_R501", "to": "IDOD101102_JTPR_I_H_R101"}, {"from": "INOD000116_CTCK_I_H_R051_GNE", "to": "INOD002985_CTCK_I_H_R051"}, {"from": "INOD000116_CTCK_I_H_R051_GNE", "to": "INOD000838_CTCK_I_H_R051"}, {"from": "INOD001633_CTCK_I_H_R051", "to": "INOD002328_CTCK_I_H_R051"}, {"from": "INOD001633_CTCK_I_H_R051", "to": "IDOD100348_BRBT_I_H_R501"}, {"from": "INOD000380_CTCK_I_H_R051", "to": "IDOD101729_CTCK_I_H_R051_GNE"}, {"from": "INOD000380_CTCK_I_H_R051", "to": "IDOD100348_BRBT_I_H_R501"}, {"from": "INOD000870_KHMG_I_H_R5A1", "to": "INOD000870_KHMG_I_H_R051"}, {"from": "INOD000870_KHMG_I_H_R5A1", "to": "INOD002000_DLUN_I_H_R5A1"}, {"from": "IDOD100348_BRBT_I_H_R501", "to": "INOD001947_TRKD_I_H_R501_GNE"}, {"from": "IDOD100348_BRBT_I_H_R501", "to": "INOD001278_BHRA_I_H_R101"}, {"from": "IDOD102303_BDLH_I_H_R5A1", "to": "INOD002458_PRBS_I_H_R101"}, {"from": "IDOD102303_BDLH_I_H_R5A1", "to": "INOD000556_PTBM_I_H_R051"}, {"from": "INOD002122_BLBH_I_H_R051", "to": "INOD001848_NNDL_I_H_R5A1"}, {"from": "IDOD101013_SLPR_I_H_R501_GNE", "to": "INOD001305_JIPR_I_H_R501_GNE"}, {"from": "IDOD101013_SLPR_I_H_R501_GNE", "to": "INOD001727_BLKK_I_H_R101"}, {"from": "INOD002328_CTCK_I_H_R051", "to": "INOD001848_CTCK_I_H_R051"}, {"from": "INOD001848_NNDL_I_H_R5A1", "to": "INOD001848_CTCK_I_H_R051"}, {"from": "IDOD101729_CTCK_I_H_R051_GNE", "to": "INOD000838_CTCK_I_H_R051"}, {"from": "INOD001947_TRKD_I_H_R501_GNE", "to": "INOD002481_TRKD_I_H_R051"}, {"from": "INOD001947_TRKD_I_H_R501_GNE", "to": "INOD003166_ANKI_I_H_R101"}, {"from": "IDOD101361_BLJG_I_H_R101", "to": "INOD003166_ANKI_I_H_R101"}, {"from": "IDOD101361_BLJG_I_H_R101", "to": "IDOD100356_BRDI_I_H_R101"}, {"from": "INOD002600_CTCK_I_H_R051", "to": "INOD002985_CTCK_I_H_R051"}, {"from": "INOD002600_CTCK_I_H_R051", "to": "INOD002033_CTCK_I_H_R052"}, {"from": "INOD001848_CTCK_I_H_R051", "to": "INOD002067_CTCK_I_H_R051"}, {"from": "IDOD101102_JTPR_I_H_R101", "to": "INOD002293_CHPL_I_H_R101"}, {"from": "INOD002961_PKHD_I_H_R101", "to": "INOD002603_SRLP_I_H_R101"}, {"from": "INOD000483_BMRI_I_H_R101", "to": "INOD002866_42MJ_I_H_R101"}, {"from": "INOD000603_SAMJ_I_H_R051", "to": "INOD000603_SYMJ_I_H_R051"}, {"from": "IDOD100924_TLPD_I_H_R503", "to": "INOD001305_JIPR_I_H_R501_GNE"}, {"from": "INOD001999_URSN_I_H_R101", "to": "INOD000567_HLPD_I_H_R101"}, {"from": "INOD002033_CTCK_I_H_R052", "to": "INOD000740_CTCK_I_H_R051"}, {"from": "INOD001605_PTKR_I_H_R501", "to": "INOD001894_KLBU_I_H_R051"}, {"from": "INOD001605_PTKR_I_H_R501", "to": "INOD000870_KHMG_I_H_R051"}, {"from": "INOD000340_SLGJ_I_H_R101", "to": "INOD000340_SLJG_I_H_R5A1"}, {"from": "INOD000340_SLGJ_I_H_R101", "to": "INOD000118_TRPR_I_H_R101"}, {"from": "INOD000340_SLGJ_I_H_R101", "to": "INOD002458_PRBS_I_H_R101"}, {"from": "INOD000603_SYMJ_I_H_R051", "to": "INOD000870_KHMG_I_H_R051"}, {"from": "INOD000567_HLPD_I_H_R101", "to": "IDOD100356_BRDI_I_H_R101"}, {"from": "INOD000740_CTCK_I_H_R051", "to": "INOD002067_CTCK_I_H_R051"}, {"from": "INOD001305_JIPR_I_H_R501_GNE", "to": "INOD000118_TRPR_I_H_R101"}, {"from": "IDOD102070_JTPR_I_H_R5A1_GNE", "to": "IDOD101112_JTPR_I_H_R051"}, {"from": "IDOD101963_PRKL_I_H_R5A1", "to": "INOD001727_BLKK_I_H_R101"}, {"from": "INOD000340_SLJG_I_H_R5A1", "to": "INOD000217_RDHU_I_H_R051"}, {"from": "INOD002866_42MJ_I_H_R101", "to": "INOD001278_BHRA_I_H_R101"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
