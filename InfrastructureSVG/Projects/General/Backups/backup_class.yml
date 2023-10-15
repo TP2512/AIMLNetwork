@@ -1,4 +1,0 @@
-class: [
-  EZLifeBackup.EZLifeDjangoBackup,
-  JenkinsBackup.JenkinsBackup
-]
