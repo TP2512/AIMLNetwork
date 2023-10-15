@@ -1,0 +1,46 @@
+<!-- myapp/templates/cascading_dropdowns.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cascading Dropdowns</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<form method="post" action="{% url 'cascading_dropdowns' %}">
+    {% csrf_token %}
+    {{ circle_form.as_p }}
+    {{ vendor_form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+$(document).ready(function() {
+    // When the value in the circle dropdown changes
+    $('#id_circle').change(function() {
+        var circleId = $(this).val();
+        if (circleId) {
+            // Make an AJAX request to get vendors for the selected circle
+            $.ajax({
+                url: '/get_vendors/',
+                data: {'circle_id': circleId},
+                dataType: 'json',
+                success: function(data) {
+                    // Update the options in the vendor dropdown
+                    var options = '<option value="">---------</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $('#id_vendor').html(options);
+                }
+            });
+        } else {
+            // If no circle is selected, reset the vendor dropdown
+            $('#id_vendor').html('<option value="">---------</option>');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
