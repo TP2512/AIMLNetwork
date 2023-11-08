@@ -1,30 +1,41 @@
-from fastapi import FastAPI,Response,status,HTTPException
+from fastapi import FastAPI,Response,status,HTTPException,Depends
 from fastapi.params import Body
 from pydantic import BaseModel
 from typing import Optional
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from Network_Analysis.Test_App import models
+from sqlalchemy.orm import Session
+from .database import SessionLocal, engine
+
+
+models.Base.metadata.create_all(bind=engine)
 
 # Replace these values with your actual database connection details
-db_params = {
-    "dbname": "fastapi",
-    "user": "postgres",
-    "password": "T@rkesh@2512",
-    "host": "127.0.0.1",
-    "port": "5432",
-}
-
-try:
-    connection = psycopg2.connect(**db_params,cursor_factory=RealDictCursor)
-    cursor = connection.cursor()
-    print("Database connection successful")
-except (Exception, psycopg2.Error) as error:
-    print("Error while connecting to PostgreSQL:", error)
+# db_params = {
+#     "dbname": "fastapi",
+#     "user": "postgres",
+#     "password": "T@rkesh@2512",
+#     "host": "127.0.0.1",
+#     "port": "5432",
+# }
+#
+# try:
+#     connection = psycopg2.connect(**db_params,cursor_factory=RealDictCursor)
+#     cursor = connection.cursor()
+#     print("Database connection successful")
+# except (Exception, psycopg2.Error) as error:
+#     print("Error while connecting to PostgreSQL:", error)
 
 #uvicorn.exe main:app --reload   ----command to execute
 
 app = FastAPI()
-
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 class Post(BaseModel):
     name : str
     surname : str
@@ -37,6 +48,11 @@ def find_post(id):
 @app.get("/")
 async def hello_world():
     return {"message": "Hello World"}
+
+@app.get("/sqlachemy")
+def getsql( db: Session = Depends(get_db)):
+    return {"status":"Success"}
+
 
 @app.get("/posts")
 def get_posts():
