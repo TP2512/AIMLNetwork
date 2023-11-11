@@ -1,8 +1,8 @@
-import pandas as pd
-import networkx as nx
-from pyvis.network import Network
 import os
-import matplotlib.pyplot as plt
+
+import networkx as nx
+import pandas as pd
+from pyvis.network import Network
 
 
 def node_list_to_edge_list(a):

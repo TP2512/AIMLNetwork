@@ -1,9 +1,7 @@
 import networkx as nx
 import pandas as pd
-import itertools
-import time
-from pyvis.network import Network
-import os
+
+
 def update_source_target(row):
     if row['so_nssid'] in nssid_info['NSSID'].tolist():
         row['source'] += '_GNE'
@@ -11,15 +9,16 @@ def update_source_target(row):
         row['target'] += '_GNE'
     return row
 
-nssid_info = pd.read_excel(r"nssid.xlsx",usecols=['NSSID'])
+
+nssid_info = pd.read_excel(r"nssid.xlsx", usecols=['NSSID'])
 nssid_info.dropna(inplace=True)
 nssid_info['NSSID'] = nssid_info['NSSID'].apply(lambda x: x.strip())
 
-links = pd.read_excel(r"link_list.xlsx",usecols=['NEAlias', 'FarEndNEName'])
+links = pd.read_excel(r"link_list.xlsx", usecols=['NEAlias', 'FarEndNEName'])
 links.dropna(inplace=True)
 links.rename({'NEAlias': 'source', 'FarEndNEName': 'target'}, axis=1, inplace=True)
 links['links'] = links['source'] + '-' + links['target']
-links.drop_duplicates(['links'],keep='first', inplace=True)
+links.drop_duplicates(['links'], keep='first', inplace=True)
 links["so_nssid"] = links.source.str.split('_|-', n=1, expand=True)[0]
 links["si_nssid"] = links.target.str.split('_|-', n=1, expand=True)[0]
 links = links.apply(update_source_target, axis=1)
@@ -35,16 +34,16 @@ G = nx.from_pandas_edgelist(links, create_using=Graphtype)
 G.add_nodes_from(node_names)
 sub_graphs = nx.connected_components(G)
 
-main_nw_graph_type=[]
-name_of_gne=[]
-down_link=[]
-dep_nodes=[]
-main_graph=[]
-sub_graph_list=[]
-no_of_gne=[]
-nw_type=[]
-c=0
-gr_no=[]
+main_nw_graph_type = []
+name_of_gne = []
+down_link = []
+dep_nodes = []
+main_graph = []
+sub_graph_list = []
+no_of_gne = []
+nw_type = []
+c = 0
+gr_no = []
 all_paths = []
 gne_list = []
 link_list = []
@@ -56,11 +55,11 @@ for i, sg1 in enumerate(sub_graphs):
     new_graph = subgraph.copy()
     try:
         nx.find_cycle(subgraph)
-        main_nw_graph_type_str="Mesh"
+        main_nw_graph_type_str = "Mesh"
     except:
-        main_nw_graph_type_str="Spur"
+        main_nw_graph_type_str = "Spur"
     gne_nodes = [node for node in new_graph.nodes if "GNE" in node]
-    no_gnes=len(gne_nodes)
+    no_gnes = len(gne_nodes)
     node_groups = {gne_node: set([gne_node]) for gne_node in gne_nodes}
     for node in new_graph.nodes:
         if "GNE" not in node:
@@ -70,13 +69,13 @@ for i, sg1 in enumerate(sub_graphs):
             try:
                 min_distance = min(shortest_distances.values())
             except ValueError:
-                min_distance=0
+                min_distance = 0
             closest_gne_nodes = [gne_node for gne_node, distance in shortest_distances.items() if
                                  distance == min_distance]
             for gne_node in closest_gne_nodes:
                 node_groups[gne_node].add(node)
 
-    for ng,sg in node_groups.items():
+    for ng, sg in node_groups.items():
         subgraph = G.subgraph(sg)
         gne_llst = [j for j in sg if "_GNE" in j]
         gne_node = gne_llst[0]
@@ -110,11 +109,11 @@ for i, sg1 in enumerate(sub_graphs):
             new_graph_gne.add_edge(*edge)
             nw_type.append(main_nw_graph_type_str)
 
-list_of_edges=pd.DataFrame()
+list_of_edges = pd.DataFrame()
 list_of_edges.insert(0, "Network Type", nw_type)
 list_of_edges.insert(1, "GNE", gne_list)
 list_of_edges.insert(2, "Link", link_list)
 list_of_edges.insert(3, "Path", path_list)
-list_of_edges.to_excel("network_traverse1.xlsx",index=False)
+list_of_edges.to_excel("network_traverse1.xlsx", index=False)
 
 print("task complete")

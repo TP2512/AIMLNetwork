@@ -2,18 +2,18 @@ import networkx as nx
 import pandas as pd
 
 G = nx.Graph()
-G.add_edges_from([(1, 2), (1, 3), (2, 3), (3, 4), (2, 4) , (4,5)])
+G.add_edges_from([(1, 2), (1, 3), (2, 3), (3, 4), (2, 4), (4, 5)])
 source_node = 1
 all_paths = []
-gne_list=[]
-link_list=[]
-path_list=[]
-summarylist=[]
+gne_list = []
+link_list = []
+path_list = []
+summarylist = []
 for edge in G.edges():
     G.remove_edge(*edge)
     path_len = []
     if source_node in edge:
-        print(edge,source_node,edge)
+        print(edge, source_node, edge)
         path_len.append(0)
         link_list.append(edge)
         gne_list.append(source_node)
@@ -25,7 +25,7 @@ for edge in G.edges():
             link_list.append(edge)
             gne_list.append(source_node)
             path_list.append(path)
-            print(edge,source_node,path)
+            print(edge, source_node, path)
     link_list.append(edge)
     gne_list.append("summary")
     path_list.append(path_len)
@@ -43,10 +43,9 @@ for edge in G.edges():
 #                     link_list.append(link)
 #                     path_list.append(path)
 
-list_of_edges=pd.DataFrame()
+list_of_edges = pd.DataFrame()
 list_of_edges.insert(0, "GNE", gne_list)
 list_of_edges.insert(1, "Link", link_list)
 list_of_edges.insert(2, "Path", path_list)
-list_of_edges.to_excel("network_traverse1.xlsx",index=False)
+list_of_edges.to_excel("network_traverse1.xlsx", index=False)
 print("task complete")
-

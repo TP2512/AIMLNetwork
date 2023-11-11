@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form method="post" action="{% url 'cascading_dropdowns' %}">
+<form action="{% url 'cascading_dropdowns' %}" method="post">
     {% csrf_token %}
     {{ circle_form.as_p }}
     {{ vendor_form.as_p }}
@@ -40,6 +40,7 @@ $(document).ready(function() {
         }
     });
 });
+
 </script>
 
 </body>

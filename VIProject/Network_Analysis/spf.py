@@ -1,6 +1,7 @@
 import networkx as nx
 import pandas as pd
 
+
 # Read the Excel file and create a graph
 def create_graph_from_excel(excel_file):
     G = nx.Graph()
@@ -10,6 +11,7 @@ def create_graph_from_excel(excel_file):
         G.add_edge(source, sink)
     return G
 
+
 # Find the shortest path between source and sink nodes
 def find_shortest_path(graph, source, sink):
     try:
@@ -17,6 +19,7 @@ def find_shortest_path(graph, source, sink):
         return shortest_path
     except nx.NetworkXNoPath:
         return None  # No path exists
+
 
 # Provide your Excel file
 excel_file = r"Data\ll_test_single_net.xlsx"

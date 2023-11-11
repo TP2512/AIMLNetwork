@@ -1,11 +1,14 @@
-import networkx as nx
 import random
-from sklearn.model_selection import train_test_split
+
+import networkx as nx
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-import pandas as pd
+from sklearn.model_selection import train_test_split
 
-linked_list_df = pd.read_excel(r"C:\Users\tpujari\Desktop\infrastructuresvg\VIProject\Network_Analysis\Data\ll_test_single_net.xlsx",usecols=['source', 'target'])
+linked_list_df = pd.read_excel(
+    r"C:\Users\tpujari\Desktop\infrastructuresvg\VIProject\Network_Analysis\Data\ll_test_single_net.xlsx",
+    usecols=['source', 'target'])
 linked_list_df.dropna(inplace=True)
 linked_list_df['links'] = linked_list_df['source'] + '-' + linked_list_df['target']
 linked_list_df.drop_duplicates(['links'], keep='first', inplace=True)
@@ -42,7 +45,7 @@ clf.fit(X_train, y_train)
 
 # Make predictions
 y_pred = clf.predict(X_test)
-print(X_test,y_pred)
+print(X_test, y_pred)
 # Evaluate the model
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.2f}")

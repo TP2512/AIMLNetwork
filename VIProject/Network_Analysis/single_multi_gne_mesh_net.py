@@ -1,8 +1,11 @@
-import networkx as nx
-import pandas as pd
 import itertools
 
-linked_list_df = pd.read_excel(r"C:\Users\tpujari\Desktop\infrastructuresvg\VIProject\Network_Analysis\Data\ll_test_single_net.xlsx",usecols=['source', 'target'])
+import networkx as nx
+import pandas as pd
+
+linked_list_df = pd.read_excel(
+    r"C:\Users\tpujari\Desktop\infrastructuresvg\VIProject\Network_Analysis\Data\ll_test_single_net.xlsx",
+    usecols=['source', 'target'])
 linked_list_df.dropna(inplace=True)
 linked_list_df['links'] = linked_list_df['source'] + '-' + linked_list_df['target']
 linked_list_df.drop_duplicates(['links'], keep='first', inplace=True)
@@ -12,7 +15,7 @@ G = nx.from_pandas_edgelist(linked_list_df, create_using=Graphtype)
 sub_graphs = nx.connected_components(G)
 
 for i, sg in enumerate(sub_graphs):
-    print('main graphs',sg)
+    print('main graphs', sg)
     subgraph = G.subgraph(sg)
     new_graph = subgraph.copy()
     gne_nodes = [node for node in new_graph.nodes if "GNE" in node]
@@ -28,8 +31,8 @@ for i, sg in enumerate(sub_graphs):
             for gne_node in closest_gne_nodes:
                 node_groups[gne_node].add(node)
 
-    for ng,sg in node_groups.items():
-        print("ng,sg",ng,sg)
+    for ng, sg in node_groups.items():
+        print("ng,sg", ng, sg)
         subgraph = G.subgraph(sg)
         gne_llst = [j for j in sg if "_GNE" in j]
         gne_node = gne_llst[0]

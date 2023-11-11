@@ -1,50 +1,18 @@
-from fastapi import FastAPI,Response,status,HTTPException,Depends
-from models import Post
-import models,Schemas
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
+from database import Base, engine
 import database as dtb
+import models
+from routers import post, user
 
 models.db.Base.metadata.create_all(bind=dtb.engine)
 app = FastAPI()
+app.include_router(post.router)
+app.include_router(user.router)
 
 
-@app.get("/posts")
-def get_posts( db: Session = Depends(dtb.get_db)):
-    posts=db.query(models.Post).all()
-    return {"data":posts}
-
-@app.post("/posts")
-def create_posts( post : Schemas.CreatePost, db: Session = Depends(dtb.get_db)):
-    new_post=models.Post(**post.dict())
-    db.add(new_post)
-    db.commit()
-    db.refresh(new_post)
-    return {"msg":new_post}
-
-@app.get("/posts/{id}")
-def get_single_post(id: str, db: Session = Depends(dtb.get_db)):
-    posts=db.query(models.Post).filter(models.Post.id == id).first()
-    if not posts:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"posts not found with id {id}")
-    return {"data":posts}
-@app.delete("/posts/{id}")
-def delete_posts(id:str, db: Session = Depends(dtb.get_db)):
-    post=db.query(models.Post).filter(models.Post.id == id)
-    if post.first()==None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"post with id: {id} does not exists")
-    post.delete(synchronize_session=False)
-    db.commit()
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
-
-@app.patch("/posts/{id}")
-def patch_post(id:str,post:Schemas.Post, db: Session = Depends(dtb.get_db)):
-    post_query = db.query(models.Post).filter(models.Post.id == id)
-    if post_query.first() == None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"post with id: {id} does not exists")
-    post_query.update(post.dict(),synchronize_session=False)
-    db.commit()
-    return {"updated data":post_query.first()}
-
+@app.get("/")
+def root():
+    return {"message": "Your at my project"}
 
 # @app.get("/posts")
 # def get_posts():

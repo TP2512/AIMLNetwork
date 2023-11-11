@@ -1,5 +1,6 @@
 # myapp/urls.py
 from django.urls import path
+
 from .views import cascading_dropdowns, get_vendors
 
 urlpatterns = [

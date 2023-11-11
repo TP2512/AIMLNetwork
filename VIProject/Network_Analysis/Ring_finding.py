@@ -1,5 +1,6 @@
 import networkx as nx
 
+
 def find_rings(graph):
     rings = []
     visited = set()
@@ -22,6 +23,7 @@ def find_rings(graph):
 
     return rings
 
+
 def common_nodes_in_same_or_neighboring_ring(graph, gne1, gne2):
     rings = find_rings(graph)
 
@@ -35,9 +37,10 @@ def common_nodes_in_same_or_neighboring_ring(graph, gne1, gne2):
 
     return common_nodes
 
+
 # Create a sample graph
 G = nx.Graph()
-G.add_edges_from([(1, 2), (2, 3), (3, 4), (4, 5), (5, 1),(5, 6), (6, 7), (7, 8), (8, 9), (9, 6)])
+G.add_edges_from([(1, 2), (2, 3), (3, 4), (4, 5), (5, 1), (5, 6), (6, 7), (7, 8), (8, 9), (9, 6)])
 
 gne1 = 1
 gne2 = 7

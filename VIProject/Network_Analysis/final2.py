@@ -1,5 +1,7 @@
 import networkx as nx
 import pandas as pd
+
+
 class DependencyFinder:
     def __init__(self):
         self.Graphtype = nx.Graph()
@@ -12,14 +14,14 @@ class DependencyFinder:
         self.c = 0
         self.gr_no = list()
 
-    def update_source_target(self,row):
+    def update_source_target(self, row):
         if row['so_nssid'] in nssid_info['NSSID'].tolist():
             row['source'] += '_GNE'
         if row['si_nssid'] in nssid_info['NSSID'].tolist():
             row['target'] += '_GNE'
         return row
 
-    def nssid_data_formatter(self,path):
+    def nssid_data_formatter(self, path):
         nssid_info = pd.read_excel(path, usecols=['NSSID'])
         nssid_info.dropna(inplace=True)
         nssid_info['NSSID'] = nssid_info['NSSID'].apply(lambda x: x.strip())
@@ -36,7 +38,7 @@ class DependencyFinder:
         links = links.apply(update_source_target, axis=1)
         return links
 
-    def graph_creater(self,df):
+    def graph_creater(self, df):
         G = nx.from_pandas_edgelist(df, create_using=self.Graphtype)
         dt = pd.DataFrame([])
         dt = pd.concat([df["source"], df["target"]], axis=0, ignore_index=True)
@@ -45,14 +47,3 @@ class DependencyFinder:
         G.add_nodes_from(node_names)
         sub_graphs = nx.connected_components(G)
         return sub_graphs
-
-
-
-
-
-
-
-
-
-
-

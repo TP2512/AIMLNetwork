@@ -1,8 +1,9 @@
-import pandas as pd
-import networkx as nx
-from pyvis.network import Network
 import os
-import matplotlib.pyplot as plt
+
+import networkx as nx
+import pandas as pd
+from pyvis.network import Network
+
 
 def update_source_target(row):
     if row['so_nssid'] in nssid_info['NSSID'].tolist():
@@ -12,15 +13,15 @@ def update_source_target(row):
     return row
 
 
-nssid_info = pd.read_excel(r"Data\nssid.xlsx",usecols=['NSSID'])
+nssid_info = pd.read_excel(r"Data\nssid.xlsx", usecols=['NSSID'])
 nssid_info.dropna(inplace=True)
 nssid_info['NSSID'] = nssid_info['NSSID'].apply(lambda x: x.strip())
 
-links = pd.read_excel(r"Data\link_list_odi.xlsx",usecols=['NEAlias', 'FarEndNEName'])
+links = pd.read_excel(r"Data\link_list_odi.xlsx", usecols=['NEAlias', 'FarEndNEName'])
 links.dropna(inplace=True)
 links.rename({'NEAlias': 'source', 'FarEndNEName': 'target'}, axis=1, inplace=True)
 links['links'] = links['source'] + '-' + links['target']
-links.drop_duplicates(['links'],keep='first', inplace=True)
+links.drop_duplicates(['links'], keep='first', inplace=True)
 links["so_nssid"] = links.source.str.split('_|-', n=1, expand=True)[0]
 links["si_nssid"] = links.target.str.split('_|-', n=1, expand=True)[0]
 links = links.apply(update_source_target, axis=1)
@@ -54,7 +55,6 @@ for i, subgraph_nodes in enumerate(sub_graphs):
         html_filename = os.path.join("Graphs", f'subgraph_{gne_nodes[0]}.html')
     except:
         html_filename = os.path.join("Graphs", f'subgraph_{all_nodes[0]}.html')
-
 
     # Save the visualization as an HTML file (optional)
     net.save_graph(html_filename)
